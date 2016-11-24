@@ -53,6 +53,16 @@ class Hell_Player():
         #/opt/vc/bin/tvservice -p && /opt/vc/bin/tvservice -o
         #Turning the power back on:
         #/opt/vc/bin/tvservice -p && chvt 1 && chvt 7
+
+    def _render_text(self, message, font=None):
+        """Draw the provided message and return as pygame surface of it rendered
+        with the configured foreground and background color.
+        """
+        # Default to small font if not provided.
+        if font is None:
+            font = self._small_font
+        return font.render(message, True, (255,255,255), (0,0,0))
+
     def PrintResults(self):
 
         label1 = self._render_text('Test')
@@ -61,6 +71,17 @@ class Hell_Player():
         self._screen.fill((0, 0, 0))
         self._screen.blit(label1, (sw/2-l1w/2, sh/2-l2h/2-l1h))
         self._screen.blit(label2, (sw/2-l2w/2, sh/2-l2h/2))
+        pygame.display.update()
+
+    def PrintArrows(self):
+        label1 = self._render_text('Test2')
+        l1w, l1h = label1.get_size()
+        sw, sh = self._screen.get_size()
+        self._screen.fill((0, 0, 0))
+        self._screen.blit(label1, (sw/2-l1w/2, sh/2-l2h/2-l1h))
+        self._screen.blit(label2, (sw/2-l2w/2, sh/2-l2h/2))
+        pygame.draw.polygon(window, (0, 0, 0), ((0, 100), (0, 200), (200, 200), (200, 300), (300, 150), (200, 0), (200, 100)))
+
         pygame.display.update()
  
     def _blank_screen(self):
