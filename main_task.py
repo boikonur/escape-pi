@@ -22,14 +22,14 @@ class Hell_Player():
         
         # Initialize pygame and display a blank screen.
         pygame.display.init()
-        #pygame.font.init()
+        pygame.font.init()
         pygame.mouse.set_visible(False)
         
         size = (pygame.display.Info().current_w, pygame.display.Info().current_h)
         self._screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
         self._blank_screen()            
-        #self._small_font = pygame.font.Font(None, 50)
-        #self._big_font   = pygame.font.Font(None, 250)
+        self._small_font = pygame.font.Font(None, 50)
+        self._big_font   = pygame.font.Font(None, 250)
         
     def _load_player(self):     
         return importlib.import_module('hello_video', 'hell_player') \
@@ -53,7 +53,15 @@ class Hell_Player():
         #/opt/vc/bin/tvservice -p && /opt/vc/bin/tvservice -o
         #Turning the power back on:
         #/opt/vc/bin/tvservice -p && chvt 1 && chvt 7
-        #
+    def PrintResults(self):
+
+        label1 = self._render_text('Test')
+        l1w, l1h = label1.get_size()
+        sw, sh = self._screen.get_size()
+        self._screen.fill((0, 0, 0))
+        self._screen.blit(label1, (sw/2-l1w/2, sh/2-l2h/2-l1h))
+        self._screen.blit(label2, (sw/2-l2w/2, sh/2-l2h/2))
+        pygame.display.update()
  
     def _blank_screen(self):
         """Render a blank screen filled with the background color."""
