@@ -6,9 +6,9 @@ import subprocess
 import time
 
 
-class OMXPlayer(object):
+class OMXPlayer():
 
-    def __init__(self, config):
+    def __init__(self):
         """Create an instance of a video player that runs omxplayer in the background.
         """
         self._process = None
@@ -69,6 +69,6 @@ class OMXPlayer(object):
         self._process = None
 
 
-def create_player(config):
+def create_player():
     """Create new video player based on omxplayer."""
-    return OMXPlayer(config)
+    return OMXPlayer()
