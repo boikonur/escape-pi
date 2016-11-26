@@ -29,9 +29,7 @@ class OMXPlayer():
             args.append('--loop')         # Add loop parameter if necessary.
         args.append(movie)                # Add movie file path.
         # Run omxplayer process and direct standard output to /dev/null.
-        self._process = subprocess.Popen(args,
-                                         stdout=open(os.devnull, 'wb'),
-                                         close_fds=True)
+        self._process = subprocess.Popen(args, stdout=open(os.devnull, 'wb'), close_fds=True)
 
     def is_playing(self):
         """Return true if the video player is running, false otherwise."""

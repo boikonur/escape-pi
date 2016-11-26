@@ -35,11 +35,11 @@ class Hell_Player():
         self._big_font   = pygame.font.Font(None, 250)
         
     def _load_player(self):     
-        return importlib.import_module('omxplayer', 'hell_player') \
+        return importlib.import_module('omxplayer', 'escape-pi') \
             .create_player()
         
     def _load_serial(self):     
-        return importlib.import_module('serial_com', 'hell_player') \
+        return importlib.import_module('serial_com', 'escape-pi') \
             .create_serial()
     
     def Shutdown(self):  
@@ -66,7 +66,7 @@ class Hell_Player():
             font = self._small_font
         return font.render(message, True, color, BLACK)
 
-    def _animate_countdown(self, seconds=10):
+    def _animate_countdown(self, seconds=3):
         label1 = self._render_text(' Starting Game in')
         l1w, l1h = label1.get_size()
         sw, sh = self._screen.get_size()
@@ -119,7 +119,7 @@ class Hell_Player():
     def run(self):   
       
         #self._serial.connect()       
-        #self.PrintResults()        
+        self.PrintResults()        
         self._animate_countdown()
         self._blank_screen()
 
