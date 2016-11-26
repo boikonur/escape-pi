@@ -93,9 +93,7 @@ class Hell_Player():
 
         sw, sh = self._screen.get_size()
         self._screen.fill((0, 0, 0))
-        # self._screen.blit(label1, (sw/2-l1w/2, sh/2-l2h/2-l1h))
         # self._screen.blit(label2, (sw/2-l2w/2, sh/2-l2h/2))
-        pygame.draw.polygon(self._screen, WHITE, ((0, 100), (0, 200), (200, 200), (200, 300), (300, 150), (200, 0), (200, 100)))
         pygame.display.update()
  
     def _blank_screen(self):
@@ -108,7 +106,6 @@ class Hell_Player():
         self._serial.connect();
         
         PrintArrows()
-
         while self._running:              
                               
               if self._vid is True:
