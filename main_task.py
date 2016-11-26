@@ -13,6 +13,7 @@ BLACK = (0,0,0)
 WHITE = (255,255,255)
 LABEL_COLOR = (43,123,123)
 RESULT_COLOR = (134,123,21)
+TITLE_COLOR = (85,12,124)
 
 class Hell_Player():
 
@@ -87,22 +88,35 @@ class Hell_Player():
     def PrintResults(self, results=[0,0,0]):
         print('print: results')
         label0 = self._render_text('RESULTS', self._big_font, LABEL_COLOR )
-        label1 = self._render_text('Footstep Game:'+ results[0])
-        label2 = self._render_text('Punch Panda Game: '+  results[1])
-        label3 = self._render_text('Kick a sack Game:' +  results[2])
+        label1 = self._render_text('Footstep Game:', TITLE_COLOR)
+        label2 = self._render_text('Punch Panda Game:', TITLE_COLOR)
+        label3 = self._render_text('Kick a sack Game:', TITLE_COLOR)
+
+        res_string1 = self._render_text(str(results[0]), RESULT_COLOR)
+        res_string2 = self._render_text(str(results[1]), RESULT_COLOR)
+        res_string3 = self._render_text(str(results[2]), RESULT_COLOR)
 
         l0w, l0h = label0.get_size()
         l1w, l1h = label1.get_size()
         l2w, l2h = label2.get_size()
         l3w, l3h = label3.get_size()
 
+        r1w, r1h = res_string1.get_size()
+        r2w, r2h = res_string2.get_size()
+        r3w, r3h = res_string3.get_size()
+
         sw, sh = self._screen.get_size()
         self._screen.fill(BLACK)
 
-        self._screen.blit(label0, (sw/2-l0w/2, sh-l0h))
-        self._screen.blit(label1, (sw/4, sh/2-l1h/2-l1h))
-        self._screen.blit(label2, (sw/4, sh/2-l2h/2-l2h))
-        self._screen.blit(label3, (sw/4, sh/2-l3h/2))
+        self._screen.blit(label0, (sw/2-l0w/2, l0h))
+
+        self._screen.blit(label1, (sw/5, sh/3+l2h))
+        self._screen.blit(label2, (sw/5, sh/3+l2h+l3h))
+        self._screen.blit(label3, (sw/5, sh/3))
+
+        self._screen.blit(res_string1, (sw/2, sh/3+l2h))
+        self._screen.blit(res_string2, (sw/2, sh/3+l2h+l3h))
+        self._screen.blit(res_string3, (sw/2, sh/3))
 
 
         pygame.display.update()
@@ -144,7 +158,7 @@ class Hell_Player():
             if self._stage == 3:  
 
                 #inputCMD= self._serial.read() 
-                inputCMD= 'rez,1222,1222,1222\n'
+                inputCMD= 'rez,1222,22222,3333\n'
                 command = inputCMD.strip().split(",", 8)
                 # rez,1222,1222,1222
                 if command[0] == "rez":
@@ -152,7 +166,7 @@ class Hell_Player():
                     print('arg1: ' + command[1])
                     print('arg2: ' + command[2])
                     print('arg3: ' + command[3])
-                    PrintResults([command[1],command[2],command[3]])
+                    self.PrintResults([command[1],command[2],command[3]])
                     inputCMD=""
                     command=[]
 
