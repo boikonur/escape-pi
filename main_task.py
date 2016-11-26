@@ -104,87 +104,88 @@ class Hell_Player():
     def run(self):   
       
         self._serial.connect();
-        
-        
-        while self._running:              
-              PrintResults()       
-              if self._vid is True:
-                self._movie = "vid" + str(self._stage) + ".h264"              
-              else:
-                self._movie = "loop" + str(self._stage) + ".h264"                     
+        PrintResults()
+        self._player.play('test.mp4', loop = 1)
+
+        # while self._running:              
+        #              
+        #       if self._vid is True:
+        #         self._movie = "vid" + str(self._stage) + ".h264"              
+        #       else:
+        #         self._movie = "loop" + str(self._stage) + ".h264"                     
                             
-              if not self._player.is_playing():
-                  self._blank_screen()
-                  self._player.play(self._videos + self._movie, loop = self._vid!=True)
-                  print('Playing: {0}'.format(self._movie))                
+        #       if not self._player.is_playing():
+        #           self._blank_screen()
+        #           self._player.play(self._videos + self._movie, loop = self._vid!=True)
+        #           print('Playing: {0}'.format(self._movie))                
            
-              else:
+        #       else:
                 
-                if self._vid is True:
-                    self._vid=False
-                    self._stage+=1
-                    if self._stage>4:
-                      self._stage=4
-                else:
-                  inputCMD= self._serial.read()
+        #         if self._vid is True:
+        #             self._vid=False
+        #             self._stage+=1
+        #             if self._stage>4:
+        #               self._stage=4
+        #         else:
+        #           inputCMD= self._serial.read()
                            
                 
-                if inputCMD == "pi1"+"\n":
-                    inputCMD=""
-                    self._player.stop()
-                    self._vid=True;
-                    self._movie = "vid" + str(self._stage) + ".h264"
-                    self._stage=1
+        #         if inputCMD == "pi1"+"\n":
+        #             inputCMD=""
+        #             self._player.stop()
+        #             self._vid=True;
+        #             self._movie = "vid" + str(self._stage) + ".h264"
+        #             self._stage=1
                 
 
-                if inputCMD == "pi2"+"\n":
-                    inputCMD=""
-                    self._player.stop()
-                    self._vid=True;
-                    self._movie = "vid" + str(self._stage) + ".h264"
-                    self._stage=2
+        #         if inputCMD == "pi2"+"\n":
+        #             inputCMD=""
+        #             self._player.stop()
+        #             self._vid=True;
+        #             self._movie = "vid" + str(self._stage) + ".h264"
+        #             self._stage=2
                 
 
-                if inputCMD == "pi3"+"\n":
-                    inputCMD=""
-                    self._player.stop()
-                    self._vid=True;
-                    self._movie = "vid" + str(self._stage) + ".h264"
-                    self._stage=3
+        #         if inputCMD == "pi3"+"\n":
+        #             inputCMD=""
+        #             self._player.stop()
+        #             self._vid=True;
+        #             self._movie = "vid" + str(self._stage) + ".h264"
+        #             self._stage=3
 
-                if inputCMD == "pi4"+"\n":
-                    inputCMD=""
-                    self._player.stop()
-                    self._vid=True;
-                    self._movie = "vid" + str(self._stage) + ".h264"
-                    self._stage=4
+        #         if inputCMD == "pi4"+"\n":
+        #             inputCMD=""
+        #             self._player.stop()
+        #             self._vid=True;
+        #             self._movie = "vid" + str(self._stage) + ".h264"
+        #             self._stage=4
                 
 
-                if inputCMD == "re"+"\n":
-                    inputCMD=""
-                    self._player.stop()
-                    self._vid=False;
-                    self._stage=1   
+        #         if inputCMD == "re"+"\n":
+        #             inputCMD=""
+        #             self._player.stop()
+        #             self._vid=False;
+        #             self._stage=1   
                     
-                if inputCMD == "off1"+"\n":
-                    inputCMD=""
-                    self._running = False
-                    if self._player is not None:
-                      self._player.stop()
-                    self.Shutdown()
+        #         if inputCMD == "off1"+"\n":
+        #             inputCMD=""
+        #             self._running = False
+        #             if self._player is not None:
+        #               self._player.stop()
+        #             self.Shutdown()
                 
-                if inputCMD == "tv1"+"\n":
-                    inputCMD=""
-                    self.ScreenOn()
+        #         if inputCMD == "tv1"+"\n":
+        #             inputCMD=""
+        #             self.ScreenOn()
                     
-                if inputCMD == "tv0"+"\n":
-                    inputCMD=""
-                    self.ScreenOff()
+        #         if inputCMD == "tv0"+"\n":
+        #             inputCMD=""
+        #             self.ScreenOff()
                             
               
                 
-            # Give the CPU some time to do other tasks.
-                time.sleep(0.002)
+        #     # Give the CPU some time to do other tasks.
+        #         time.sleep(0.002)
 
     def signal_quit(self, signal, frame):
         """Shut down the program, meant to by called by signal handler."""
@@ -192,6 +193,7 @@ class Hell_Player():
         if self._player is not None:
             self._player.stop()
         pygame.quit()
+        sys.exit(0)
      
 
 
