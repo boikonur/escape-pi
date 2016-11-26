@@ -119,7 +119,7 @@ class Hell_Player():
     def run(self):   
       
         #self._serial.connect()       
-        print("count")
+           
         self._animate_countdown()
         self._blank_screen()
 
@@ -185,7 +185,7 @@ class Hell_Player():
         if self._player is not None:
             self._player.stop()
         pygame.quit()
-        #sys.exit(0)
+        sys.exit(0)
      
 
 
