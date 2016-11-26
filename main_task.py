@@ -128,6 +128,7 @@ class Hell_Player():
             while self._stage == 1:
                 if not self._player.is_playing():        
                     self._player.play(self._videodir + 'test.mp4', loop = False)
+                    print('playing: ' + self._videodir + 'test.mp4')
                     self._stage=2
 
             if self._stage == 2:
