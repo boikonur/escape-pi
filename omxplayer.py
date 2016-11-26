@@ -14,10 +14,12 @@ class OMXPlayer():
         self._extra_args = '--no-osd --audio_fifo 0.01 --video_fifo 0.01'
         # video FIFO buffers are kept low to reduce clipping ends of movie at loop.
         self._sound = 'hdmi'
+        print("omx: constructor")
         #('hdmi', 'local', 'both')
 
     def play(self, movie, loop=False, vol=0):
        
+        print("omx: play")
         self.stop(3)  # Up to 3 second delay to let the old player stop.
         # Assemble list of arguments.
         args = ['/usr/bin/omxplayer']
