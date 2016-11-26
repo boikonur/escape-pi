@@ -20,7 +20,7 @@ class OMXPlayer():
        
         self.stop(3)  # Up to 3 second delay to let the old player stop.
         # Assemble list of arguments.
-        args = ['omxplayer']
+        args = ['/usr/bin/omxplayer']
         args.extend(['-o', self._sound])  # Add sound arguments.
         args.extend(self._extra_args)     # Add extra arguments from config.
         if vol is not 0:
@@ -46,7 +46,7 @@ class OMXPlayer():
         if self._process is not None and self._process.returncode is None:
             # There are a couple processes used by omxplayer, so kill both
             # with a pkill command.
-            subprocess.call(['pkill', '-9', 'omxplayer'])
+            subprocess.call(['pkill', '-9', str(self._process.pid)])
         # If a blocking timeout was specified, wait up to that amount of time
         # for the process to stop.
         start = time.time()
