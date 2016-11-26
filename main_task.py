@@ -87,10 +87,10 @@ class Hell_Player():
 
     def PrintResults(self, results=[0,0,0]):
         print('print: results')
-        label0 = self._render_text('RESULTS', self._big_font, LABEL_COLOR )
-        label1 = self._render_text('Footstep Game:', self._small_font,  TITLE_COLOR)
-        label2 = self._render_text('Punch Panda Game:', self._small_font,  TITLE_COLOR)
-        label3 = self._render_text('Kick a sack Game:',  self._small_font, TITLE_COLOR)
+        label0 = self._render_text('RESULT/РЕЗУЛТ', self._big_font, LABEL_COLOR )
+        label1 = self._render_text('1: Footstep Game:', self._small_font,  TITLE_COLOR)
+        label2 = self._render_text('2: Punch Panda Game:', self._small_font,  TITLE_COLOR)
+        label3 = self._render_text('3: Kick a sack Game:',  self._small_font, TITLE_COLOR)
 
         res_string1 = self._render_text(str(results[0]), self._small_font, RESULT_COLOR)
         res_string2 = self._render_text(str(results[1]), self._small_font, RESULT_COLOR)
@@ -108,15 +108,15 @@ class Hell_Player():
         sw, sh = self._screen.get_size()
         self._screen.fill(BLACK)
 
-        self._screen.blit(label0, (sw/2-l0w/2, l0h))
+        self._screen.blit(label0, (sw/2-l0w/2, l0h/3))
 
-        self._screen.blit(label1, (sw/5, sh/3+l2h))
-        self._screen.blit(label2, (sw/5, sh/3+l2h+l3h))
-        self._screen.blit(label3, (sw/5, sh/3))
+        self._screen.blit(label1, (sw/5, sh/3))
+        self._screen.blit(label2, (sw/5, sh/3+l1h*2))
+        self._screen.blit(label3, (sw/5, sh/3+l1h*2 +l2h*2))
 
-        self._screen.blit(res_string1, (sw/2, sh/3+l2h))
-        self._screen.blit(res_string2, (sw/2, sh/3+l2h+l3h))
-        self._screen.blit(res_string3, (sw/2, sh/3))
+        self._screen.blit(res_string1, (sw/2, sh/3))
+        self._screen.blit(res_string2, (sw/2, sh/3+l1h*2))
+        self._screen.blit(res_string3, (sw/2, sh/3+l1h*2 +l2h*2))
 
 
         pygame.display.update()
