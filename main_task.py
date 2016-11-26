@@ -106,7 +106,7 @@ class Hell_Player():
         self._serial.connect();
         PrintResults()
         self._player.play('test.mp4', loop = 1)
-
+        print('Playing: file')
         # while self._running:              
         #              
         #       if self._vid is True:
