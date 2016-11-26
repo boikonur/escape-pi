@@ -122,13 +122,10 @@ class Hell_Player():
            
         self._animate_countdown()
         self._blank_screen()
-
-        self._player.play(self._videodir + 'test.mp4', loop = False)
-
      
         while self._running:   
 
-            while self._stage == 1:
+            if self._stage == 1:
                 if not self._player.is_playing():        
                     self._player.play(self._videodir + 'test.mp4', loop = False)
                     print('playing: ' + self._videodir + 'test.mp4')
@@ -136,11 +133,13 @@ class Hell_Player():
 
             if self._stage == 2:
                 if not self._player.is_playing(): 
-                    self._stage =3
+                    print('movie finished, printing result screen')
                     self._blank_screen()
+                    self.PrintResults()
+                    self._stage =3
 
             if self._stage == 3:  
-
+                
                 #inputCMD= self._serial.read() 
                 inputCMD= "rez,1222,1222,1222\n"
                 command = inputCMD.strip().split(",", 8)
