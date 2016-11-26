@@ -125,7 +125,7 @@ class Hell_Player():
 
                 #inputCMD= self._serial.read() 
                 inputCMD= "rez,1222,1222,1222\n"
-                command = inputCMD.strip().split(str=",")
+                command = inputCMD.strip().splits(sep=",", maxsplit=8)
                 # rez,1222,1222,1222
                 if command[0] == "rez"+"\n":
                     print('arg1: ' + command[1])
