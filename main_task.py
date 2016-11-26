@@ -103,12 +103,18 @@ class Hell_Player():
         
     def run(self):   
       
-        self._serial.connect();
-        PrintResults()
-        print('print: results')
-        self._player.play('test.mp4', loop = 1)
-        print('Playing: file')
-        # while self._running:              
+        #self._serial.connect();
+
+        while self._running: 
+            print('bofore print')
+            self.PrintResults()
+            print('print: results')
+            self._blank_screen()
+            self._player.play('test.mp4', loop = 1)
+
+            while self._player.is_playing():
+                print('Playing: file')
+                      
         #              
         #       if self._vid is True:
         #         self._movie = "vid" + str(self._stage) + ".h264"              
