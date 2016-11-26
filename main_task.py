@@ -105,7 +105,7 @@ class Hell_Player():
       
         self._serial.connect();
         
-        
+        PrintArrows()
         while self._running:              
               PrintResults()       
               if self._vid is True:
