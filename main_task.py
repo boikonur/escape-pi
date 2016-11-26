@@ -126,7 +126,9 @@ class Hell_Player():
         self._player.play(self._videodir + 'test.mp4', loop = False)
 
         while 1:
-            print('playing: ' + self._videodir + 'test.mp4') 
+            if not self._player.is_playing(): 
+                print('playing: ' + self._videodir + 'test.mp4') 
+            else:
             time.sleep(0.002)
 
         while self._running:   
