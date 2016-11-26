@@ -22,10 +22,10 @@ class OMXPlayer():
         self.stop(3)  # Up to 3 second delay to let the old player stop.
         # Assemble list of arguments.
         args = ['/usr/bin/omxplayer']
-        args.extend(['-o', 'hdmi'])   #('hdmi', 'local', 'both')
+        args.extend(['-o','hdmi'])   #('hdmi', 'local', 'both')
         args.extend('--no-osd --audio_fifo 0.01 --video_fifo 0.01') # video FIFO buffers are kept low to reduce clipping ends of movie at loop.
         if vol is not 0:
-            args.extend(['--vol', str(vol)])
+            args.append(['--vol', str(vol)])
         if loop:
             args.append('--loop')         # Add loop parameter if necessary.
         args.append(movie)                # Add movie file path.
