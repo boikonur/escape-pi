@@ -84,12 +84,12 @@ class Hell_Player():
             time.sleep(1)
 
 
-    def PrintResults(self):
+    def PrintResults(self, results=[0,0,0]):
         print('print: results')
         label0 = self._render_text('RESULTS', self._big_font, LABEL_COLOR )
-        label1 = self._render_text('Footstep Game:')
-        label2 = self._render_text('Punch Panda Game:')
-        label3 = self._render_text('Kick a sack Game:')
+        label1 = self._render_text('Footstep Game:'+ results[0])
+        label2 = self._render_text('Punch Panda Game: '+  results[1])
+        label3 = self._render_text('Kick a sack Game:' +  results[2])
 
         l0w, l0h = label0.get_size()
         l1w, l1h = label1.get_size()
@@ -100,8 +100,11 @@ class Hell_Player():
         self._screen.fill(BLACK)
 
         self._screen.blit(label0, (sw/2-l0w/2, sh-l0h))
-        self._screen.blit(label1, (sw/2-l1w/2, sh/2-l2h/2-l1h))
-        self._screen.blit(label2, (sw/2-l2w/2, sh/2-l2h/2))
+        self._screen.blit(label1, (sw/4, sh/2-l1h/2-l1h))
+        self._screen.blit(label2, (sw/4, sh/2-l2h/2-l2h))
+        self._screen.blit(label3, (sw/4, sh/2-l3h/2))
+
+
         pygame.display.update()
 
     def PrintArrows(self):
@@ -145,10 +148,13 @@ class Hell_Player():
                 command = inputCMD.strip().split(",", 8)
                 # rez,1222,1222,1222
                 if command[0] == "rez":
-                    inputCMD=""
+
                     print('arg1: ' + command[1])
                     print('arg2: ' + command[2])
                     print('arg3: ' + command[3])
+                    PrintResults([command[1],command[2],command[3]])
+                    inputCMD=""
+                    command=[]
 
                 
                 if inputCMD == "reset"+"\n":
