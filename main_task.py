@@ -8,23 +8,20 @@ import signal
 import time
 
 import pygame
-# loop1 ->|-> vid1 -> loop2>|-> vid2->loop3->|-> vid3->loop4->|-> vid4->exit
-
 
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 LABEL_COLOR = (43,123,123)
 RESULT_COLOR = (134,123,21)
+
 class Hell_Player():
 
     def __init__(self):
         self._serial = self._load_serial()
         self._player = self._load_player()        
         self._running = True
-        self._vid = False
         self._stage = 1
-        self._videodir = "/home/pi/exape-pi/"
-        self._movie = ""
+        self._videodir = "/home/pi/escape-pi/"
         
         # Initialize pygame and display a blank screen.
         pygame.display.init()
@@ -67,7 +64,7 @@ class Hell_Player():
         # Default to small font if not provided.
         if font is None:
             font = self._small_font
-        return font.render(message, True, color, (0,0,0))
+        return font.render(message, True, color, BLACK)
 
     def _animate_countdown(self, seconds=10):
         label1 = self._render_text(' Starting Game in')
@@ -100,7 +97,7 @@ class Hell_Player():
         l3w, l3h = label3.get_size()
 
         sw, sh = self._screen.get_size()
-        self._screen.fill((0, 0, 0))
+        self._screen.fill(BLACK)
 
         self._screen.blit(label0, (sw/2-l0w/2, sh-l0h))
         self._screen.blit(label1, (sw/2-l1w/2, sh/2-l2h/2-l1h))
@@ -110,13 +107,13 @@ class Hell_Player():
     def PrintArrows(self):
 
         sw, sh = self._screen.get_size()
-        self._screen.fill((0, 0, 0))
+        self._screen.fill(BLACK)
         # self._screen.blit(label2, (sw/2-l2w/2, sh/2-l2h/2))
         pygame.display.update()
  
     def _blank_screen(self):
         """Render a blank screen filled with the background color."""
-        self._screen.fill((0, 0, 0))
+        self._screen.fill(BLACK)
         pygame.display.update()
         
     def run(self):   
@@ -125,6 +122,7 @@ class Hell_Player():
         #self.PrintResults()        
         self._animate_countdown()
         self._blank_screen()
+
         while self._running:   
 
             while self._stage == 1:
@@ -132,12 +130,12 @@ class Hell_Player():
                     self._player.play(self._videodir + 'test.mp4', loop = False)
                     self._stage=2
 
-            while self._stage == 2:
+            if self._stage == 2:
                 if not self._player.is_playing(): 
                     self._stage =3
                     self._blank_screen()
 
-            while self._stage == 3:  
+            if self._stage == 3:  
 
                 #inputCMD= self._serial.read() 
                 inputCMD= "rez,1222,1222,1222\n"
@@ -170,7 +168,7 @@ class Hell_Player():
                     self.ScreenOff()                    
               
                 # Give the CPU some time to do other tasks.
-                time.sleep(0.002)
+            time.sleep(0.002)
 
     def signal_quit(self, signal, frame):
         """Shut down the program, meant to by called by signal handler."""
