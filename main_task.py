@@ -23,7 +23,7 @@ class Hell_Player():
         self._running = True
         self._vid = False
         self._stage = 1
-        self._videos = "/video/"
+        self._videodir = "/home/pi/exape-pi/"
         self._movie = ""
         
         # Initialize pygame and display a blank screen.
@@ -70,7 +70,7 @@ class Hell_Player():
         return font.render(message, True, color, (0,0,0))
 
     def PrintResults(self):
-
+        print('print: results')
         label0 = self._render_text('RESULTS', self._big_font, LABEL_COLOR )
         label1 = self._render_text('Footstep Game:')
         label2 = self._render_text('Punch Panda Game:')
@@ -103,96 +103,49 @@ class Hell_Player():
         
     def run(self):   
       
-        #self._serial.connect();
-
-        while self._running: 
-            print('bofore print')
-            self.PrintResults()
-            print('print: results')
-            self._blank_screen()
-            self._player.play('test.mp4', loop = 1)
-
-            while self._player.is_playing():
-                print('Playing: file')
-                      
-        #              
-        #       if self._vid is True:
-        #         self._movie = "vid" + str(self._stage) + ".h264"              
-        #       else:
-        #         self._movie = "loop" + str(self._stage) + ".h264"                     
-                            
-        #       if not self._player.is_playing():
-        #           self._blank_screen()
-        #           self._player.play(self._videos + self._movie, loop = self._vid!=True)
-        #           print('Playing: {0}'.format(self._movie))                
-           
-        #       else:
-                
-        #         if self._vid is True:
-        #             self._vid=False
-        #             self._stage+=1
-        #             if self._stage>4:
-        #               self._stage=4
-        #         else:
-        #           inputCMD= self._serial.read()
-                           
-                
-        #         if inputCMD == "pi1"+"\n":
-        #             inputCMD=""
-        #             self._player.stop()
-        #             self._vid=True;
-        #             self._movie = "vid" + str(self._stage) + ".h264"
-        #             self._stage=1
-                
-
-        #         if inputCMD == "pi2"+"\n":
-        #             inputCMD=""
-        #             self._player.stop()
-        #             self._vid=True;
-        #             self._movie = "vid" + str(self._stage) + ".h264"
-        #             self._stage=2
-                
-
-        #         if inputCMD == "pi3"+"\n":
-        #             inputCMD=""
-        #             self._player.stop()
-        #             self._vid=True;
-        #             self._movie = "vid" + str(self._stage) + ".h264"
-        #             self._stage=3
-
-        #         if inputCMD == "pi4"+"\n":
-        #             inputCMD=""
-        #             self._player.stop()
-        #             self._vid=True;
-        #             self._movie = "vid" + str(self._stage) + ".h264"
-        #             self._stage=4
-                
-
-        #         if inputCMD == "re"+"\n":
-        #             inputCMD=""
-        #             self._player.stop()
-        #             self._vid=False;
-        #             self._stage=1   
-                    
-        #         if inputCMD == "off1"+"\n":
-        #             inputCMD=""
-        #             self._running = False
-        #             if self._player is not None:
-        #               self._player.stop()
-        #             self.Shutdown()
-                
-        #         if inputCMD == "tv1"+"\n":
-        #             inputCMD=""
-        #             self.ScreenOn()
-                    
-        #         if inputCMD == "tv0"+"\n":
-        #             inputCMD=""
-        #             self.ScreenOff()
-                            
+        self._serial.connect();       
+        self.PrintResults()        
+        
+        while self._running:         
               
+              if not self._player.is_playing():
+                  self._blank_screen()
+                  self._player.play(self._videodir + 'test.mp4', loop = False)
+                  print('Playing: {0}'.format('test.mp4'))                
+           
+              else:
                 
-        #     # Give the CPU some time to do other tasks.
-        #         time.sleep(0.002)
+                inputCMD= self._serial.read()            
+                command = inputCMD.strip().split(str=",")
+                # rez,1222,1222,1222
+                if command[0] == "rez"+"\n":
+                    print('arg1: ' + command[1])
+                    print('arg2: ' + command[2])
+                    print('arg3: ' + command[3])
+
+                
+                if inputCMD == "reset"+"\n":
+                    inputCMD=""
+                    self._player.stop()
+                    self._stage=1   
+                    
+                if inputCMD == "pioff"+"\n":
+                    inputCMD=""
+                    self._running = False
+                    if self._player is not None:
+                      self._player.stop()
+                    self.Shutdown()
+                
+                if inputCMD == "piscron"+"\n":
+                    inputCMD=""
+                    self.ScreenOn()
+                    
+                if inputCMD == "piscroff"+"\n":
+                    inputCMD=""
+                    self.ScreenOff()                    
+              
+                # Give the CPU some time to do other tasks.
+                time.sleep(0.002)
 
     def signal_quit(self, signal, frame):
         """Shut down the program, meant to by called by signal handler."""
