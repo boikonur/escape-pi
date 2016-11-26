@@ -12,8 +12,8 @@ import pygame
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 LABEL_COLOR = (43,123,123)
-RESULT_COLOR = (134,123,21)
-TITLE_COLOR = (85,12,124)
+RESULT_COLOR = (134,67,21)
+TITLE_COLOR = (85,23,47)
 
 class Hell_Player():
 
@@ -21,7 +21,7 @@ class Hell_Player():
         self._serial = self._load_serial()
         self._player = self._load_player()        
         self._running = True
-        self._stage = 1
+        self._stage = 2
         self._videodir = "/home/pi/escape-pi/"
         
         # Initialize pygame and display a blank screen.
@@ -114,9 +114,9 @@ class Hell_Player():
         self._screen.blit(label2, (sw/5, sh/3+l1h*2))
         self._screen.blit(label3, (sw/5, sh/3+l1h*2 +l2h*2))
 
-        self._screen.blit(res_string1, (sw/2, sh/3))
-        self._screen.blit(res_string2, (sw/2, sh/3+l1h*2))
-        self._screen.blit(res_string3, (sw/2, sh/3+l1h*2 +l2h*2))
+        self._screen.blit(res_string1, (sw/2+sw/4, sh/3))
+        self._screen.blit(res_string2, (sw/2+sw/4, sh/3+l1h*2))
+        self._screen.blit(res_string3, (sw/2+sw/4, sh/3+l1h*2 +l2h*2))
 
 
         pygame.display.update()
@@ -154,11 +154,11 @@ class Hell_Player():
                     self._blank_screen()
                     self.PrintResults()
                     self._stage =3
-
+ 		    inputCMD= 'rez,1222,22222,3333\n'
             if self._stage == 3:  
 
                 #inputCMD= self._serial.read() 
-                inputCMD= 'rez,1222,22222,3333\n'
+              #  inputCMD= 'rez,1222,22222,3333\n'
                 command = inputCMD.strip().split(",", 8)
                 # rez,1222,1222,1222
                 if command[0] == "rez":
