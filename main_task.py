@@ -139,12 +139,13 @@ class Hell_Player():
                     self._stage =3
 
             if self._stage == 3:  
-                
+
                 #inputCMD= self._serial.read() 
-                inputCMD= "rez,1222,1222,1222\n"
+                inputCMD= 'rez,1222,1222,1222\n'
                 command = inputCMD.strip().split(",", 8)
                 # rez,1222,1222,1222
-                if command[0] == "rez"+"\n":
+                if command[0] == "rez":
+                    inputCMD=""
                     print('arg1: ' + command[1])
                     print('arg2: ' + command[2])
                     print('arg3: ' + command[3])
