@@ -1,6 +1,3 @@
-# Copyright 2015 Adafruit Industries.
-# Author: Tony DiCola
-# License: GNU GPLv2, see LICENSE.txt
 import os
 import subprocess
 import time
@@ -9,21 +6,19 @@ import time
 class OMXPlayer():
 
     def __init__(self):
-        """Create an instance of a video player that runs omxplayer in the background.
+        """Create an instance of a video player that runs omxplayer in the
+        background.
         """
         self._process = None
+   
+        self._extra_args = ['--no-osd', '--audio_fifo', '0.01', '--video_fifo', '0.01']
+        
+        self._sound = 'both'
+        
 
-        # self._extensions = config.get('omxplayer', 'extensions') \
-        #                          .translate(None, ' \t\r\n.') \
-        #                          .split(',')
-
-                                 #avi, mov, mkv, mp4, m4v
-        self._extra_args = '--no-osd --audio_fifo 0.01 --video_fifo 0.01'
-        # video FIFO buffers are kept low to reduce clipping ends of movie at loop.
-
-        self._sound = 'hdmi' #config.get('omxplayer', 'sound').lower()
-
-        #assert self._sound in ('hdmi', 'local', 'both'), 'Unknown omxplayer sound configuration value: {0} Expected hdmi, local, or both.'.format(self._sound)
+    def supported_extensions(self):
+        """Return list of supported file extensions."""
+        return self._extensions
 
     def play(self, movie, loop=False, vol=0):
         """Play the provided movied file, optionally looping it repeatedly."""
