@@ -87,7 +87,7 @@ class Hell_Player():
 
     def PrintResults(self, results=[0,0,0]):
         print('print: results')
-        label0 = self._render_text('RESULT/РЕЗУЛТ', self._big_font, LABEL_COLOR )
+        label0 = self._render_text('RESULT', self._big_font, LABEL_COLOR )
         label1 = self._render_text('1: Footstep Game:', self._small_font,  TITLE_COLOR)
         label2 = self._render_text('2: Punch Panda Game:', self._small_font,  TITLE_COLOR)
         label3 = self._render_text('3: Kick a sack Game:',  self._small_font, TITLE_COLOR)
