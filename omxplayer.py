@@ -10,12 +10,11 @@ class OMXPlayer():
 
     def __init__(self):
 
-        self._process = None
-        self._extra_args = '--no-osd --audio_fifo 0.01 --video_fifo 0.01'
-        # video FIFO buffers are kept low to reduce clipping ends of movie at loop.
-        self._sound = 'hdmi'
+        self._process = None 
+        
+ 
         print("omx: constructor")
-        #('hdmi', 'local', 'both')
+       
 
     def play(self, movie, loop=False, vol=0):
        
@@ -23,15 +22,19 @@ class OMXPlayer():
         self.stop(3)  # Up to 3 second delay to let the old player stop.
         # Assemble list of arguments.
         args = ['/usr/bin/omxplayer']
-        args.extend(['-o', self._sound])  # Add sound arguments.
-        args.extend(self._extra_args)     # Add extra arguments from config.
+        args.extend(['-o', 'hdmi'])   #('hdmi', 'local', 'both')
+        args.extend('--no-osd --audio_fifo 0.01 --video_fifo 0.01') # video FIFO buffers are kept low to reduce clipping ends of movie at loop.
         if vol is not 0:
             args.extend(['--vol', str(vol)])
         if loop:
             args.append('--loop')         # Add loop parameter if necessary.
         args.append(movie)                # Add movie file path.
         # Run omxplayer process and direct standard output to /dev/null.
-        self._process = subprocess.Popen(args, stdout=open(os.devnull, 'wb'), close_fds=True)
+        #self._process = subprocess.Popen(args, stdout=open(os.devnull, 'wb'), close_fds=True)
+        print(str(args))
+        self._process = subprocess.Popen(args)
+        print("popen: " +str( self._process.pid) + " ret code: " +str(self._process.returncode))
+ 
 
     def is_playing(self):
         """Return true if the video player is running, false otherwise."""
