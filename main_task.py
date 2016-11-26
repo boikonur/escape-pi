@@ -88,13 +88,13 @@ class Hell_Player():
     def PrintResults(self, results=[0,0,0]):
         print('print: results')
         label0 = self._render_text('RESULTS', self._big_font, LABEL_COLOR )
-        label1 = self._render_text('Footstep Game:', TITLE_COLOR)
-        label2 = self._render_text('Punch Panda Game:', TITLE_COLOR)
-        label3 = self._render_text('Kick a sack Game:', TITLE_COLOR)
+        label1 = self._render_text('Footstep Game:', self._small_font,  TITLE_COLOR)
+        label2 = self._render_text('Punch Panda Game:', self._small_font,  TITLE_COLOR)
+        label3 = self._render_text('Kick a sack Game:',  self._small_font, TITLE_COLOR)
 
-        res_string1 = self._render_text(str(results[0]), RESULT_COLOR)
-        res_string2 = self._render_text(str(results[1]), RESULT_COLOR)
-        res_string3 = self._render_text(str(results[2]), RESULT_COLOR)
+        res_string1 = self._render_text(str(results[0]), self._small_font, RESULT_COLOR)
+        res_string2 = self._render_text(str(results[1]), self._small_font, RESULT_COLOR)
+        res_string3 = self._render_text(str(results[2]), self._small_font, RESULT_COLOR)
 
         l0w, l0h = label0.get_size()
         l1w, l1h = label1.get_size()
