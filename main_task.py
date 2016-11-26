@@ -127,8 +127,6 @@ class Hell_Player():
 
         while 1:
             if not self._player.is_playing(): 
-                print('playing: ' + self._videodir + 'test.mp4') 
-            else:
                 time.sleep(0.002)
 
         while self._running:   
@@ -198,5 +196,4 @@ if __name__ == '__main__':
     signal.signal(signal.SIGTERM, hell_player.signal_quit)
     signal.signal(signal.SIGINT, hell_player.signal_quit)
     # Run the main loop.
-    print('Escape PI - loop')
     hell_player.run()
