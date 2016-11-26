@@ -126,6 +126,8 @@ class Hell_Player():
         #self._serial.connect()       
         #self.PrintResults()        
         self._animate_countdown()
+        self._blank_screen()
+        
         while self._running:   
 
             while self._stage == 1:
