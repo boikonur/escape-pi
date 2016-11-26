@@ -103,19 +103,28 @@ class Hell_Player():
         
     def run(self):   
       
-        self._serial.connect();       
+        #self._serial.connect();       
         self.PrintResults()        
         
-        while self._running:         
-              
-              if not self._player.is_playing():
-                  self._blank_screen()
-                  self._player.play(self._videodir + 'test.mp4', loop = False)
-                  print('Playing: {0}'.format('test.mp4'))                
-           
-              else:
-                
-                inputCMD= self._serial.read()            
+        while self._running:    
+
+
+
+
+            while self._stage == 1:
+                if not self._player.is_playing():        
+                    self._player.play(self._videodir + 'test.mp4', loop = False)
+                    self._stage=2
+
+            while self._stage == 2:
+                if not self._player.is_playing(): 
+                    self._stage =3
+                    self._blank_screen()
+
+            while self._stage == 3:  
+
+                #inputCMD= self._serial.read() 
+                inputCMD= "rez,1222,1222,1222\n"
                 command = inputCMD.strip().split(str=",")
                 # rez,1222,1222,1222
                 if command[0] == "rez"+"\n":
