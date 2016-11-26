@@ -1,6 +1,3 @@
-# Copyright 2015 Adafruit Industries.
-# Author: Tony DiCola
-# License: GNU GPLv2, see LICENSE.txt
 import os
 import subprocess
 import time
@@ -9,32 +6,36 @@ import time
 class OMXPlayer():
 
     def __init__(self):
-
-        self._process = None 
+        """Create an instance of a video player that runs omxplayer in the
+        background.
+        """
+        self._process = None
+   
+        self._extra_args = ['--no-osd', '--audio_fifo', '0.01', '--video_fifo', '0.01']
         
- 
-        print("omx: constructor")
-       
+        self._sound = 'both'
+        
+
+    def supported_extensions(self):
+        """Return list of supported file extensions."""
+        return self._extensions
 
     def play(self, movie, loop=False, vol=0):
-       
-        print("omx: play")
+        """Play the provided movied file, optionally looping it repeatedly."""
         self.stop(3)  # Up to 3 second delay to let the old player stop.
         # Assemble list of arguments.
-        args = ['/usr/bin/omxplayer']
-        args.append(' -o hdmi')   #('hdmi', 'local', 'both')
-        args.append(' --no-osd --audio_fifo 0.01 --video_fifo 0.01') # video FIFO buffers are kept low to reduce clipping ends of movie at loop.
+        args = ['omxplayer']
+        args.extend(['-o', self._sound])  # Add sound arguments.
+        args.extend(self._extra_args)     # Add extra arguments from config.
         if vol is not 0:
-            args.append([' --vol', str(vol)])
+            args.extend(['--vol', str(vol)])
         if loop:
-            args.append(' --loop')         # Add loop parameter if necessary.
+            args.append('--loop')         # Add loop parameter if necessary.
         args.append(movie)                # Add movie file path.
         # Run omxplayer process and direct standard output to /dev/null.
-        #self._process = subprocess.Popen(args, stdout=open(os.devnull, 'wb'), close_fds=True)
-        print(str(args))
-        self._process = subprocess.Popen(args)
-        print("popen: " +str( self._process.pid) + " ret code: " +str(self._process.returncode))
- 
+        self._process = subprocess.Popen(args,
+                                         stdout=open(os.devnull, 'wb'),
+                                         close_fds=True)
 
     def is_playing(self):
         """Return true if the video player is running, false otherwise."""
@@ -51,7 +52,7 @@ class OMXPlayer():
         if self._process is not None and self._process.returncode is None:
             # There are a couple processes used by omxplayer, so kill both
             # with a pkill command.
-            subprocess.call(['pkill', '-9', str(self._process.pid)])
+            subprocess.call(['pkill', '-9', 'omxplayer'])
         # If a blocking timeout was specified, wait up to that amount of time
         # for the process to stop.
         start = time.time()
