@@ -119,7 +119,7 @@ class Hell_Player():
     def run(self):   
       
         #self._serial.connect()       
-        self.PrintResults()        
+           
         self._animate_countdown()
         self._blank_screen()
 
@@ -183,11 +183,12 @@ class Hell_Player():
 
 # Main entry point.
 if __name__ == '__main__':  
-    print('Hell Player')
+    print('Escape PI')
     # Create video looper.
     hell_player = Hell_Player()
     # Configure signal handlers to quit on TERM or INT signal.
     signal.signal(signal.SIGTERM, hell_player.signal_quit)
     signal.signal(signal.SIGINT, hell_player.signal_quit)
     # Run the main loop.
+    print('Escape PI - loop')
     hell_player.run()
