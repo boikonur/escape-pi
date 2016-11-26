@@ -69,6 +69,26 @@ class Hell_Player():
             font = self._small_font
         return font.render(message, True, color, (0,0,0))
 
+    def _animate_countdown(self, seconds=10):
+ 
+
+        label1 = self._render_text(' Starting Game in')
+        l1w, l1h = label1.get_size()
+        sw, sh = self._screen.get_size()
+        for i in range(seconds, 0, -1):
+            # Each iteration of the countdown rendering changing text.
+            label2 = self._render_text(str(i), self._big_font)
+            l2w, l2h = label2.get_size()
+            # Clear screen and draw text with line1 above line2 and all
+            # centered horizontally and vertically.
+            self._screen.fill(self._bgcolor)
+            self._screen.blit(label1, (sw/2-l1w/2, sh/2-l2h/2-l1h))
+            self._screen.blit(label2, (sw/2-l2w/2, sh/2-l2h/2))
+            pygame.display.update()
+            # Pause for a second between each frame.
+            time.sleep(1)
+
+
     def PrintResults(self):
         print('print: results')
         label0 = self._render_text('RESULTS', self._big_font, LABEL_COLOR )
@@ -103,13 +123,10 @@ class Hell_Player():
         
     def run(self):   
       
-        #self._serial.connect();       
-        self.PrintResults()        
-        
-        while self._running:    
-
-
-
+        #self._serial.connect()       
+        #self.PrintResults()        
+        self._animate_countdown()
+        while self._running:   
 
             while self._stage == 1:
                 if not self._player.is_playing():        
@@ -125,7 +142,7 @@ class Hell_Player():
 
                 #inputCMD= self._serial.read() 
                 inputCMD= "rez,1222,1222,1222\n"
-                command = inputCMD.strip().splits(sep=",", maxsplit=8)
+                command = inputCMD.strip().split(",", 8)
                 # rez,1222,1222,1222
                 if command[0] == "rez"+"\n":
                     print('arg1: ' + command[1])
