@@ -20,6 +20,41 @@ TITLE_COLOR = (85,23,47)
 OPTION_COLOR1= (252,134,134)
 OPTION_COLOR2= (134,252,162)
 
+START_TEXT_BG = 'Starting in'
+RESULT_TEXT_BG = 'RESULT'
+
+START_TEXT_EN = 'Starting in'
+RESULT_TEXT_EN = 'RESULT'
+
+GAME_NAME0_BG = 'Izpitanie Nabludatelnost'
+GAME_NAME1_BG = 'Izpitanie za Sila'
+GAME_NAME2_BG  = 'Izpitanie za Koordinaciq'
+GAME_NAME3_BG = 'Izpitanie za burzina'
+GAME_NAME4_BG  = 'Izpitanie za Lovkost'
+GAME_NAME5_BG  = 'Izpitanie za Tochnost'
+
+GAME_NAME0_EN = 'Izpitanie Nabludatelnost'
+GAME_NAME1_EN = 'Izpitanie za Sila'
+GAME_NAME2_EN  = 'Izpitanie za Koordinaciq'
+GAME_NAME3_EN = 'Izpitanie za burzina'
+GAME_NAME4_EN  = 'Izpitanie za Lovkost'
+GAME_NAME5_EN  = 'Izpitanie za Tochnost'
+#"Изпитание за наблюдателност"
+#"Изпитание за сила"
+#"Изпитание за координация"
+#"Изпитание за бързина"
+#"Изпитание за ловкост"
+#"Изпитание за точност"
+SUCCESS_TEXT_BG  = 'SUCCESS'
+FIN_QURY_TEXT_BG  = 'Finish?'
+NO_TEXT_BG  = 'NO'
+YES_TEXT_BG  = 'YES'
+
+SUCCESS_TEXT_EN  = 'SUCCESS'
+FIN_QURY_TEXT_EN  = 'Finish?'
+NO_TEXT_EN  = 'NO'
+YES_TEXT_EN  = 'YES'
+
 class Hell_Player():
 
     def __init__(self):
@@ -29,7 +64,7 @@ class Hell_Player():
         self._stage = 2
         self._videodir = "/home/pi/escape-pi/"
         self._highscore = 6000
-        
+        self._language = 'bg'
         # Initialize pygame and display a blank screen.
         pygame.display.init()
         pygame.font.init()
@@ -41,8 +76,7 @@ class Hell_Player():
         
         #fadeout()  #time
         #set_volume()  #from 0.0 to 1.0
-
-        
+       
         size = (pygame.display.Info().current_w, pygame.display.Info().current_h)
         self._screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
         self._blank_screen()            
@@ -83,7 +117,7 @@ class Hell_Player():
         return font.render(message, True, color, BLACK)
 
     def _animate_countdown(self, seconds=3):
-        label1 = self._render_text(' Starting Game in')
+        label1 = self._render_text(START_TEXT)
         l1w, l1h = label1.get_size()
         sw, sh = self._screen.get_size()
         for i in range(seconds, 0, -1):
@@ -100,12 +134,17 @@ class Hell_Player():
             time.sleep(1)
 
 
-    def PrintResults(self, results=[0,0,0]):
+    def PrintResults(self, results=[0,0,0,0,0]):
         print('print: results')
-        label0 = self._render_text('RESULT', self._big_font, LABEL_COLOR )
-        label1 = self._render_text('1: Footstep Game:', self._small_font,  TITLE_COLOR)
-        label2 = self._render_text('2: Punch Panda Game:', self._small_font,  TITLE_COLOR)
-        label3 = self._render_text('3: Kick a sack Game:',  self._small_font, TITLE_COLOR)
+
+        label0 = self._render_text(RESULT_TEXT, self._big_font, LABEL_COLOR )
+
+        label1 = self._render_text(GAME_NAME1_BG, self._small_font,  TITLE_COLOR)
+        label2 = self._render_text(GAME_NAME2_BG, self._small_font,  TITLE_COLOR)
+        label3 = self._render_text(GAME_NAME3_BG, self._small_font,  TITLE_COLOR)
+        label4 = self._render_text(GAME_NAME4_BG, self._small_font,  TITLE_COLOR)
+        label5 = self._render_text(GAME_NAME5_BG, self._small_font,  TITLE_COLOR)
+
 
         if (int(results[0]) > self._highscore):
             res_string1 = self._render_text(str(results[0]), self._small_font, RESULT_GOOD_COLOR)
@@ -122,14 +161,28 @@ class Hell_Player():
         else:
             res_string3 = self._render_text(str(results[2]), self._small_font, RESULT_BAD_COLOR)
 
+         if (int(results[3]) > self._highscore):
+            res_string4 = self._render_text(str(results[3]), self._small_font, RESULT_GOOD_COLOR)
+        else:
+            res_string4 = self._render_text(str(results[3]), self._small_font, RESULT_BAD_COLOR)
+
+         if (int(results[4]) > self._highscore):
+            res_string5 = self._render_text(str(results[4]), self._small_font, RESULT_GOOD_COLOR)
+        else:
+            res_string5 = self._render_text(str(results[4]), self._small_font, RESULT_BAD_COLOR)
+
         l0w, l0h = label0.get_size()
         l1w, l1h = label1.get_size()
         l2w, l2h = label2.get_size()
         l3w, l3h = label3.get_size()
+        l4w, l4h = label4.get_size()
+        l5w, l5h = label5.get_size()
 
         r1w, r1h = res_string1.get_size()
         r2w, r2h = res_string2.get_size()
         r3w, r3h = res_string3.get_size()
+        r4w, r4h = res_string4.get_size()
+        r5w, r5h = res_string5.get_size()
 
         sw, sh = self._screen.get_size()
         self._screen.fill(BLACK)
@@ -139,11 +192,14 @@ class Hell_Player():
         self._screen.blit(label1, (sw/5, sh/3))
         self._screen.blit(label2, (sw/5, sh/3+l1h*2))
         self._screen.blit(label3, (sw/5, sh/3+l1h*2 +l2h*2))
+        self._screen.blit(label4, (sw/5, sh/3+l1h*2 +l2h*2 + l3h*2))
+        self._screen.blit(label5, (sw/5, sh/3+l1h*2 +l2h*2 + l3h*2 +l4h*2))
 
         self._screen.blit(res_string1, (sw/2+sw/4, sh/3))
         self._screen.blit(res_string2, (sw/2+sw/4, sh/3+l1h*2))
         self._screen.blit(res_string3, (sw/2+sw/4, sh/3+l1h*2 +l2h*2))
-
+        self._screen.blit(res_string4, (sw/2+sw/4, sh/3+l1h*2 +l2h*2 +l3h*2))
+        self._screen.blit(res_string5, (sw/2+sw/4, sh/3+l1h*2 +l2h*2 +l3h*2 +l4h*2))
 
         pygame.display.update()
         pygame.mixer.music.play()
@@ -151,11 +207,11 @@ class Hell_Player():
     def PrintEndScreen(self):
         print('print: End Screen')
 
-        label0 = self._render_text('SUCCESS', self._big_font, LABEL_COLOR )
-        label1 = self._render_text('Finish Game?', self._mid_font, WHITE )
-        label2 = self._render_text('NO', self._big_font,  OPTION_COLOR1)
-        label3 = self._render_text('YES',  self._big_font, OPTION_COLOR2)
-        
+        label0 = self._render_text(SUCCESS_TEXT_BG, self._big_font, LABEL_COLOR )
+        label1 = self._render_text(FIN_QURY_TEXT_BG, self._mid_font, WHITE )
+        label2 = self._render_text(NO_TEXT_BG, self._big_font,  OPTION_COLOR1)
+        label3 = self._render_text(YES_TEXT_BG,  self._big_font, OPTION_COLOR2)
+
     
         l0w, l0h = label0.get_size()
         l1w, l1h = label1.get_size()
@@ -196,18 +252,24 @@ class Hell_Player():
      
         while self._running:   
 
+            if self._stage == 0:
+                inputCMD= self._serial.read() 
+                if inputCMD == "startgame"+"\n":
+                    inputCMD=""
+                    self._stage = 1
+
             if self._stage == 1:
                 if not self._player.is_playing():        
                     self._player.play(self._videodir + 'test.mp4', loop = False)
                     print('playing: ' + self._videodir + 'test.mp4')
-                    self._stage=2
+                    self._stage = 2
 
             if self._stage == 2:
                 if not self._player.is_playing(): 
                     print('movie finished, printing result screen')
                     self._blank_screen()
                     self.PrintResults()
-                    self._stage =3
+                    self._stage = 3
  		    #inputCMD= 'rez,1222,22222,3333\n'
         
             if self._stage == 3:  
@@ -219,19 +281,30 @@ class Hell_Player():
                     print('arg1: ' + command[1])
                     print('arg2: ' + command[2])
                     print('arg3: ' + command[3])
-                    self.PrintResults([command[1],command[2],command[3]])
+                    print('arg4: ' + command[4])
+                    print('arg5: ' + command[5])
+    
+                    self.PrintResults([command[1],command[2],command[3],command[4],command[5]])
 
                     if int(command[1]) > self._highscore and int(command[2]) > self._highscore and int(command[3]) > self._highscore :
                         print("All Games are won")
                         self._stage=4                  
                     
                     inputCMD=""
-                    command=[]
+                    command=[]           
                 
+                if inputCMD == "lang_bg"+"\n":
+                    inputCMD=""
+                    self._language='bg'
+
+                if inputCMD == "lang_en"+"\n":
+                    inputCMD=""
+                    self._language='en'
+
                 if inputCMD == "reset"+"\n":
                     inputCMD=""
                     self._player.stop()
-                    self._stage=1   
+                    self._stage=0  
                     
                 if inputCMD == "pioff"+"\n":
                     inputCMD=""
