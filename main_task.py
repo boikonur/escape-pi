@@ -9,6 +9,10 @@ import time
 
 import pygame
 
+
+
+
+
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 LABEL_COLOR = (43,123,123)
@@ -31,6 +35,11 @@ class Hell_Player():
         pygame.display.init()
         pygame.font.init()
         pygame.mouse.set_visible(False)
+        mixer.init() 
+        notify=mixer.Sound('gong.wav')
+        #fadeout()  #time
+        #set_volume()  #from 0.0 to 1.0
+
         
         size = (pygame.display.Info().current_w, pygame.display.Info().current_h)
         self._screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
@@ -124,14 +133,15 @@ class Hell_Player():
 
 
         pygame.display.update()
+        notify.play()
 
     def PrintEndScreen(self):
         print('print: End Screen')
 
         label0 = self._render_text('SUCCESS', self._big_font, LABEL_COLOR )
         label1 = self._render_text('Finish Game?', self._mid_font, LABEL_COLOR )
-        label2 = self._render_text('NO', self._small_font,  OPTION_COLOR1)
-        label3 = self._render_text('YES',  self._small_font, OPTION_COLOR2)
+        label2 = self._render_text('NO', self._big_font,  OPTION_COLOR1)
+        label3 = self._render_text('YES',  self._big_font, OPTION_COLOR2)
         
     
         l0w, l0h = label0.get_size()
@@ -150,8 +160,8 @@ class Hell_Player():
         self._screen.blit(label3, (3*sw/4, 3*sh/4))
 
         pygame.display.update()
-
-
+        notify.play()
+        
     def PrintArrows(self):
 
         sw, sh = self._screen.get_size()
