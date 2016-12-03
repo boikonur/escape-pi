@@ -13,6 +13,8 @@ BLACK = (0,0,0)
 WHITE = (255,255,255)
 LABEL_COLOR = (43,123,123)
 RESULT_COLOR = (134,67,21)
+RESULT_BAD_COLOR = (252,134,134)
+RESULT_GOOD_COLOR = (134,252,162)
 TITLE_COLOR = (85,23,47)
 
 OPTION_COLOR1= (252,134,134)
@@ -24,8 +26,9 @@ class Hell_Player():
         self._serial = self._load_serial()
         self._player = self._load_player()        
         self._running = True
-        self._stage = 4
+        self._stage = 2
         self._videodir = "/home/pi/escape-pi/"
+        self._highscore = 6000
         
         # Initialize pygame and display a blank screen.
         pygame.display.init()
@@ -104,9 +107,20 @@ class Hell_Player():
         label2 = self._render_text('2: Punch Panda Game:', self._small_font,  TITLE_COLOR)
         label3 = self._render_text('3: Kick a sack Game:',  self._small_font, TITLE_COLOR)
 
-        res_string1 = self._render_text(str(results[0]), self._small_font, RESULT_COLOR)
-        res_string2 = self._render_text(str(results[1]), self._small_font, RESULT_COLOR)
-        res_string3 = self._render_text(str(results[2]), self._small_font, RESULT_COLOR)
+        if (results[0] > self._highscore):
+            res_string1 = self._render_text(str(results[0]), self._small_font, RESULT_GOOD_COLOR)
+        else:   
+            res_string1 = self._render_text(str(results[0]), self._small_font, RESULT_BAD_COLOR)
+
+        if (results[0] > self._highscore):
+            res_string2 = self._render_text(str(results[1]), self._small_font, RESULT_GOOD_COLOR)
+        else:
+            res_string2 = self._render_text(str(results[1]), self._small_font, RESULT_BAD_COLOR)
+
+        if (results[0] > self._highscore):
+            res_string3 = self._render_text(str(results[2]), self._small_font, RESULT_GOOD_COLOR)
+        else:
+            res_string3 = self._render_text(str(results[2]), self._small_font, RESULT_BAD_COLOR)
 
         l0w, l0h = label0.get_size()
         l1w, l1h = label1.get_size()
@@ -206,6 +220,8 @@ class Hell_Player():
                     print('arg2: ' + command[2])
                     print('arg3: ' + command[3])
                     self.PrintResults([command[1],command[2],command[3]])
+
+
                     inputCMD=""
                     command=[]
                 
