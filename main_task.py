@@ -135,7 +135,7 @@ class Hell_Player():
         
     def run(self):   
       
-        #self._serial.connect()       
+        self._serial.connect()       
            
         self._animate_countdown()
         self._blank_screen()
@@ -154,13 +154,14 @@ class Hell_Player():
                     self._blank_screen()
                     self.PrintResults()
                     self._stage =3
- 		    inputCMD= 'rez,1222,22222,3333\n'
+ 		    #inputCMD= 'rez,1222,22222,3333\n'
+        
             if self._stage == 3:  
 
-                #inputCMD= self._serial.read() 
-              #  inputCMD= 'rez,1222,22222,3333\n'
+                #inputCMD= 'rez,1222,22222,3333\n'
+                inputCMD= self._serial.read() 
                 command = inputCMD.strip().split(",", 8)
-                # rez,1222,1222,1222
+             
                 if command[0] == "rez":
 
                     print('arg1: ' + command[1])
