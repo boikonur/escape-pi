@@ -112,12 +112,12 @@ class Hell_Player():
         else:   
             res_string1 = self._render_text(str(results[0]), self._small_font, RESULT_BAD_COLOR)
 
-        if (results[0] > self._highscore):
+        if (results[1] > self._highscore):
             res_string2 = self._render_text(str(results[1]), self._small_font, RESULT_GOOD_COLOR)
         else:
             res_string2 = self._render_text(str(results[1]), self._small_font, RESULT_BAD_COLOR)
 
-        if (results[0] > self._highscore):
+        if (results[2] > self._highscore):
             res_string3 = self._render_text(str(results[2]), self._small_font, RESULT_GOOD_COLOR)
         else:
             res_string3 = self._render_text(str(results[2]), self._small_font, RESULT_BAD_COLOR)
