@@ -15,13 +15,16 @@ LABEL_COLOR = (43,123,123)
 RESULT_COLOR = (134,67,21)
 TITLE_COLOR = (85,23,47)
 
+OPTION_COLOR1= (252,134,134)
+OPTION_COLOR2= (134,252,162)
+
 class Hell_Player():
 
     def __init__(self):
         self._serial = self._load_serial()
         self._player = self._load_player()        
         self._running = True
-        self._stage = 2
+        self._stage = 4
         self._videodir = "/home/pi/escape-pi/"
         
         # Initialize pygame and display a blank screen.
@@ -33,6 +36,7 @@ class Hell_Player():
         self._screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
         self._blank_screen()            
         self._small_font = pygame.font.Font(None, 50)
+        self._mid_font = pygame.font.Font(None, 100)
         self._big_font   = pygame.font.Font(None, 250)
         
     def _load_player(self):     
@@ -121,6 +125,33 @@ class Hell_Player():
 
         pygame.display.update()
 
+    def PrintEndScreen(self):
+        print('print: End Screen')
+
+        label0 = self._render_text('SUCCESS', self._big_font, LABEL_COLOR )
+        label1 = self._render_text('Finish Game?', self._mid_font, LABEL_COLOR )
+        label2 = self._render_text('NO', self._small_font,  OPTION_COLOR1)
+        label3 = self._render_text('YES',  self._small_font, OPTION_COLOR2)
+        
+    
+        l0w, l0h = label0.get_size()
+        l1w, l1h = label1.get_size()
+        l2w, l2h = label2.get_size()
+        l3w, l3h = label3.get_size()
+
+        sw, sh = self._screen.get_size()
+        self._screen.fill(BLACK)
+
+        self._screen.blit(label0, (sw/2-l0w/2, l0h/3))
+
+        self._screen.blit(label1, (sw/2, sh/2))
+
+        self._screen.blit(label2, (3*sw/4, sh/4))
+        self._screen.blit(label3, (3*sw/4, 3*sh/4))
+
+        pygame.display.update()
+
+
     def PrintArrows(self):
 
         sw, sh = self._screen.get_size()
@@ -191,7 +222,9 @@ class Hell_Player():
                 if inputCMD == "piscroff"+"\n":
                     inputCMD=""
                     self.ScreenOff()                    
-              
+            
+            if self._stage == 4:
+                self.PrintEndScreen()
                 # Give the CPU some time to do other tasks.
             time.sleep(0.002)
 
