@@ -34,7 +34,7 @@ class Hell_Player():
 
         pygame.mixer.init()
         pygame.mixer.music.load("gong.wav")       
-        
+        pygame.mixer.music.set_volume(10)
         
         #fadeout()  #time
         #set_volume()  #from 0.0 to 1.0
@@ -138,7 +138,7 @@ class Hell_Player():
         print('print: End Screen')
 
         label0 = self._render_text('SUCCESS', self._big_font, LABEL_COLOR )
-        label1 = self._render_text('Finish Game?', self._mid_font, LABEL_COLOR )
+        label1 = self._render_text('Finish Game?', self._mid_font, WHITE )
         label2 = self._render_text('NO', self._big_font,  OPTION_COLOR1)
         label3 = self._render_text('YES',  self._big_font, OPTION_COLOR2)
         
@@ -155,8 +155,8 @@ class Hell_Player():
 
         self._screen.blit(label1, (sw/2-l1w/2, sh/2+l1h/2))
 
-        self._screen.blit(label2, (sw/4, 3*sh/4))
-        self._screen.blit(label3, (3*sw/4, 3*sh/4))
+        self._screen.blit(label2, (sw/4-l2w/2, 3*sh/4))
+        self._screen.blit(label3, (3*sw/4-l3w/2, 3*sh/4))
 
         pygame.display.update()
         pygame.mixer.music.play()
