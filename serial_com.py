@@ -10,7 +10,7 @@ class SerialCom():
           """ Connect or disconnect Return connection status."""
           try:
             if self.ser == None:
-                self.ser = serial.Serial('/dev/ttyAMA0',9600,timeout=1)
+                self.ser = serial.Serial('/dev/ttyS0',9600,timeout=1)
                 print "Successfully connected on /dev/ttyAMA0"
                 self.ser.flushInput()
                 self.ser.flushOutput()
