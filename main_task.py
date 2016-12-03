@@ -13,7 +13,7 @@ BLACK = (0,0,0)
 WHITE = (255,255,255)
 LABEL_COLOR = (43,123,123)
 RESULT_COLOR = (134,67,21)
-RESULT_BAD_COLOR = (252,134,134)
+RESULT_BAD_COLOR = (252,120,120)
 RESULT_GOOD_COLOR = (134,252,162)
 TITLE_COLOR = (85,23,47)
 
@@ -107,17 +107,17 @@ class Hell_Player():
         label2 = self._render_text('2: Punch Panda Game:', self._small_font,  TITLE_COLOR)
         label3 = self._render_text('3: Kick a sack Game:',  self._small_font, TITLE_COLOR)
 
-        if (results[0] > self._highscore):
+        if (int(results[0]) > self._highscore):
             res_string1 = self._render_text(str(results[0]), self._small_font, RESULT_GOOD_COLOR)
         else:   
             res_string1 = self._render_text(str(results[0]), self._small_font, RESULT_BAD_COLOR)
 
-        if (results[1] > self._highscore):
+        if (int(results[1]) > self._highscore):
             res_string2 = self._render_text(str(results[1]), self._small_font, RESULT_GOOD_COLOR)
         else:
             res_string2 = self._render_text(str(results[1]), self._small_font, RESULT_BAD_COLOR)
 
-        if (results[2] > self._highscore):
+        if (int(results[2]) > self._highscore):
             res_string3 = self._render_text(str(results[2]), self._small_font, RESULT_GOOD_COLOR)
         else:
             res_string3 = self._render_text(str(results[2]), self._small_font, RESULT_BAD_COLOR)
@@ -221,7 +221,10 @@ class Hell_Player():
                     print('arg3: ' + command[3])
                     self.PrintResults([command[1],command[2],command[3]])
 
-
+                    if int(command[1]) > self._highscore and int(command[2]) > self._highscore and int(command[3]) > self._highscore :
+                        print("All Games are won")
+                        self._stage=4                  
+                    
                     inputCMD=""
                     command=[]
                 
