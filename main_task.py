@@ -144,9 +144,9 @@ class Hell_Player():
 
         self._screen.blit(label0, (sw/2-l0w/2, l0h/3))
 
-        self._screen.blit(label1, (sw/2, sh/2))
+        self._screen.blit(label1, (sw/2-l1w/2, sh/2+l1h/2))
 
-        self._screen.blit(label2, (3*sw/4, sh/4))
+        self._screen.blit(label2, (sw/4, 3*sh/4))
         self._screen.blit(label3, (3*sw/4, 3*sh/4))
 
         pygame.display.update()
@@ -188,20 +188,17 @@ class Hell_Player():
  		    #inputCMD= 'rez,1222,22222,3333\n'
         
             if self._stage == 3:  
-
                 #inputCMD= 'rez,1222,22222,3333\n'
                 inputCMD= self._serial.read() 
                 command = inputCMD.strip().split(",", 8)
              
                 if command[0] == "rez":
-
                     print('arg1: ' + command[1])
                     print('arg2: ' + command[2])
                     print('arg3: ' + command[3])
                     self.PrintResults([command[1],command[2],command[3]])
                     inputCMD=""
                     command=[]
-
                 
                 if inputCMD == "reset"+"\n":
                     inputCMD=""
@@ -225,6 +222,10 @@ class Hell_Player():
             
             if self._stage == 4:
                 self.PrintEndScreen()
+                self._stage = 5
+
+            #if self._stage == 5:
+
                 # Give the CPU some time to do other tasks.
             time.sleep(0.002)
 
