@@ -9,10 +9,6 @@ import time
 
 import pygame
 
-
-
-
-
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 LABEL_COLOR = (43,123,123)
@@ -35,8 +31,11 @@ class Hell_Player():
         pygame.display.init()
         pygame.font.init()
         pygame.mouse.set_visible(False)
-        mixer.init() 
-        notify=mixer.Sound('gong.wav')
+
+        pygame.mixer.init()
+        pygame.mixer.music.load("gong.wav")       
+        
+        
         #fadeout()  #time
         #set_volume()  #from 0.0 to 1.0
 
@@ -133,7 +132,7 @@ class Hell_Player():
 
 
         pygame.display.update()
-        notify.play()
+        pygame.mixer.music.play()
 
     def PrintEndScreen(self):
         print('print: End Screen')
@@ -160,7 +159,7 @@ class Hell_Player():
         self._screen.blit(label3, (3*sw/4, 3*sh/4))
 
         pygame.display.update()
-        notify.play()
+        pygame.mixer.music.play()
         
     def PrintArrows(self):
 
