@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+# -*- coding: utf-8 -*-
 import importlib
 import os
 import re
@@ -117,7 +117,7 @@ class Hell_Player():
         return font.render(message, True, color, BLACK)
 
     def _animate_countdown(self, seconds=3):
-        label1 = self._render_text(START_TEXT)
+        label1 = self._render_text(START_TEXT_BG)
         l1w, l1h = label1.get_size()
         sw, sh = self._screen.get_size()
         for i in range(seconds, 0, -1):
@@ -137,7 +137,7 @@ class Hell_Player():
     def PrintResults(self, results=[0,0,0,0,0]):
         print('print: results')
 
-        label0 = self._render_text(RESULT_TEXT, self._big_font, LABEL_COLOR )
+        label0 = self._render_text(RESULT_TEXT_BG, self._big_font, LABEL_COLOR )
 
         label1 = self._render_text(GAME_NAME1_BG, self._small_font,  TITLE_COLOR)
         label2 = self._render_text(GAME_NAME2_BG, self._small_font,  TITLE_COLOR)
@@ -161,12 +161,12 @@ class Hell_Player():
         else:
             res_string3 = self._render_text(str(results[2]), self._small_font, RESULT_BAD_COLOR)
 
-         if (int(results[3]) > self._highscore):
+        if (int(results[3]) > self._highscore):
             res_string4 = self._render_text(str(results[3]), self._small_font, RESULT_GOOD_COLOR)
         else:
             res_string4 = self._render_text(str(results[3]), self._small_font, RESULT_BAD_COLOR)
 
-         if (int(results[4]) > self._highscore):
+        if (int(results[4]) > self._highscore):
             res_string5 = self._render_text(str(results[4]), self._small_font, RESULT_GOOD_COLOR)
         else:
             res_string5 = self._render_text(str(results[4]), self._small_font, RESULT_BAD_COLOR)
@@ -275,20 +275,19 @@ class Hell_Player():
             if self._stage == 3:  
                 #inputCMD= 'rez,1222,22222,3333\n'
                 inputCMD= self._serial.read() 
-                command = inputCMD.strip().split(",", 8)
+                command = inputCMD.strip().split(",", 10)
              
                 if command[0] == "rez":
-                    print('arg1: ' + command[1])
-                    print('arg2: ' + command[2])
-                    print('arg3: ' + command[3])
-                    print('arg4: ' + command[4])
-                    print('arg5: ' + command[5])
-    
-                    self.PrintResults([command[1],command[2],command[3],command[4],command[5]])
 
-                    if int(command[1]) > self._highscore and int(command[2]) > self._highscore and int(command[3]) > self._highscore :
-                        print("All Games are won")
-                        self._stage=4                  
+                    for idx, word in enumerate(command):
+                        print('arg' + idx +':'+word)
+            
+    
+                    #self.PrintResults([command[1],command[2],command[3],command[4],command[5]])
+
+                    #if int(command[1]) > self._highscore and int(command[2]) > self._highscore and int(command[3]) > self._highscore :
+                     #   print("All Games are won")
+                    #    self._stage=4                  
                     
                     inputCMD=""
                     command=[]           
