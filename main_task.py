@@ -11,7 +11,7 @@ import pygame
 
 BLACK = (0,0,0)
 WHITE = (255,255,255)
-LABEL_COLOR = (43,123,123)
+LABEL_COLOR = (43,170,170)
 RESULT_COLOR = (134,67,21)
 RESULT_BAD_COLOR = (252,120,120)
 RESULT_GOOD_COLOR = (134,252,162)
@@ -83,7 +83,7 @@ class Hell_Player():
         size = (pygame.display.Info().current_w, pygame.display.Info().current_h)
         self._screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
         self._blank_screen()            
-        self._small_font = pygame.font.Font(None, 50)
+        self._small_font = pygame.font.Font(None, 80)
         self._mid_font = pygame.font.Font(None, 100)
         self._big_font   = pygame.font.Font(None, 250)
         
@@ -303,9 +303,9 @@ class Hell_Player():
                     self._highscore= int(command[1])+int(command[2])+int(command[3])+int(command[4])+int(command[5])+int(command[6])
                     self.PrintResults([command[1],command[2],command[3],command[4],command[5],command[6]])
 
-                    #if int(command[1]) > self._highscore and int(command[2]) > self._highscore and int(command[3]) > self._highscore :
-                     #   print("All Games are won")
-                    #    self._stage=4                  
+                    if int(command[5]) > GAME5_MIN_POINTS and int(command[6]) > GAME6_MIN_POINTS:
+                       print("All Games are won")
+                       self._stage=4                  
                     
                     inputCMD=""
                     command=[]           
