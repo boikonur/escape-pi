@@ -16,7 +16,7 @@ RESULT_COLOR = (134,67,21)
 RESULT_BAD_COLOR = (252,120,120)
 RESULT_GOOD_COLOR = (134,252,162)
 TITLE_COLOR = (255,216,50)
-
+HIGHSCORE_COLOR=(30, 250, 30)
 OPTION_COLOR1= (252,134,134)
 OPTION_COLOR2= (134,252,162)
 
@@ -223,7 +223,7 @@ class Hell_Player():
 
         label0 = self._render_text(SUCCESS_TEXT_BG, self._big_font, LABEL_COLOR )
         label1 = self._render_text(FIN_QURY_TEXT_BG, self._mid_font, WHITE )
-        label2 = self._render_text(unicode(self._highscore), self._mid_font, WHITE )
+        label2 = self._render_text(unicode(self._highscore), self._big_font, HIGHSCORE_COLOR )
 
         label3 = self._render_text(NO_TEXT_BG, self._big_font,  OPTION_COLOR1)
         label4 = self._render_text(YES_TEXT_BG,  self._big_font, OPTION_COLOR2)
@@ -241,7 +241,7 @@ class Hell_Player():
         self._screen.blit(label0, (sw/2-l0w/2, l0h/3))
 
         self._screen.blit(label1, (sw/2-l1w/2, sh/2+l1h/2))
-        self._screen.blit(label2, (sw/2-l1w/2, sh/2-l1h/2))
+        self._screen.blit(label2, (sw/2-l2w/2, sh/2-l2h))
 
         self._screen.blit(label3, (sw/4-l2w/2, 3*sh/4))
         self._screen.blit(label4, (3*sw/4-l3w/2, 3*sh/4))
