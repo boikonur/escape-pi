@@ -292,12 +292,12 @@ class Hell_Player():
         headers = {'Content-Type' : 'application/json'}
         login_payload = {'device_info': {'app-id': 'fc', 'os-type': 'os'}}
 
-        authentication = (login, password)  # Anyone who sees your authorization will be able to get this anyway
+        #authentication = (login, password)  # Anyone who sees your authorization will be able to get this anyway
 
         #response = requests.post(url, data=login_payload, auth=authentication, headers=headers))
         responce = requests.post(url, data=login_payload, headers=headers)
-        print 'POST Code:' + responce.status_code
-        print 'POST Content:' + responce.content
+        print 'POST Code:' + str(responce.status_code)
+        print 'POST Content:' + str(responce.content)
         
     def run(self):   
       
