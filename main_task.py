@@ -20,40 +20,35 @@ TITLE_COLOR = (85,23,47)
 OPTION_COLOR1= (252,134,134)
 OPTION_COLOR2= (134,252,162)
 
-START_TEXT_BG = 'Starting in'
-RESULT_TEXT_BG = 'RESULT'
+START_TEXT_BG = u'Играта започва след:'
+RESULT_TEXT_BG = u'РЕЗУЛТАТ'
 
-START_TEXT_EN = 'Starting in'
-RESULT_TEXT_EN = 'RESULT'
+START_TEXT_EN = u'Starting in'
+RESULT_TEXT_EN = u'RESULT'
 
-GAME_NAME0_BG = 'Izpitanie Nabludatelnost'
-GAME_NAME1_BG = 'Izpitanie za Sila'
-GAME_NAME2_BG  = 'Izpitanie za Koordinaciq'
-GAME_NAME3_BG = 'Izpitanie za burzina'
-GAME_NAME4_BG  = 'Izpitanie za Lovkost'
-GAME_NAME5_BG  = 'Izpitanie za Tochnost'
+GAME_NAME0_BG = u'Изпитание за наблюдателност'
+GAME_NAME1_BG = u'Изпитание за сила'
+GAME_NAME2_BG  = u'Изпитание за координация'
+GAME_NAME3_BG = u'Изпитание за бързина'
+GAME_NAME4_BG  = u'Изпитание за ловкост'
+GAME_NAME5_BG  = u'Изпитание за точност'
 
-GAME_NAME0_EN = 'Izpitanie Nabludatelnost'
-GAME_NAME1_EN = 'Izpitanie za Sila'
-GAME_NAME2_EN  = 'Izpitanie za Koordinaciq'
-GAME_NAME3_EN = 'Izpitanie za burzina'
-GAME_NAME4_EN  = 'Izpitanie za Lovkost'
-GAME_NAME5_EN  = 'Izpitanie za Tochnost'
-#"Изпитание за наблюдателност"
-#"Изпитание за сила"
-#"Изпитание за координация"
-#"Изпитание за бързина"
-#"Изпитание за ловкост"
-#"Изпитание за точност"
-SUCCESS_TEXT_BG  = 'SUCCESS'
-FIN_QURY_TEXT_BG  = 'Finish?'
-NO_TEXT_BG  = 'NO'
-YES_TEXT_BG  = 'YES'
+GAME_NAME0_EN = u'Izpitanie Nabludatelnost'
+GAME_NAME1_EN = u'Izpitanie za Sila'
+GAME_NAME2_EN  = u'Izpitanie za Koordinaciq'
+GAME_NAME3_EN = u'Izpitanie za burzina'
+GAME_NAME4_EN  = u'Izpitanie za Lovkost'
+GAME_NAME5_EN  = u'Izpitanie za Tochnost'
 
-SUCCESS_TEXT_EN  = 'SUCCESS'
-FIN_QURY_TEXT_EN  = 'Finish?'
-NO_TEXT_EN  = 'NO'
-YES_TEXT_EN  = 'YES'
+SUCCESS_TEXT_BG  = u'ФИНАЛ'
+FIN_QURY_TEXT_BG  = u'Край?'
+NO_TEXT_BG  = u'НЕ'
+YES_TEXT_BG  = u'ДА'
+
+SUCCESS_TEXT_EN  = u'SUCCESS'
+FIN_QURY_TEXT_EN  = u'Finish?'
+NO_TEXT_EN  = u'NO'
+YES_TEXT_EN  = u'YES'
 
 class Hell_Player():
 
