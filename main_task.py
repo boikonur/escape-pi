@@ -140,7 +140,7 @@ class Hell_Player():
     def PrintResults(self, results=[0,0,0,0,0,0]):
         print('print: results')
 
-        if self._language == 'bg'
+        if self._language == 'bg':
             label0 = self._render_text(RESULT_TEXT_BG, self._big_font,   LABEL_COLOR)
             label1 = self._render_text(GAME_NAME0_BG, self._small_font,  TITLE_COLOR)
             label2 = self._render_text(GAME_NAME1_BG, self._small_font,  TITLE_COLOR)
@@ -227,7 +227,7 @@ class Hell_Player():
 
     def PrintEndScreen(self):
         print('print: End Screen')
-        if self._language == 'bg'
+        if self._language == 'bg':
             label0 = self._render_text(SUCCESS_TEXT_BG, self._big_font, LABEL_COLOR )
             label1 = self._render_text(FIN_QURY_TEXT_BG, self._mid_font, WHITE )
             label3 = self._render_text(NO_TEXT_BG, self._big_font,  OPTION_COLOR1)
