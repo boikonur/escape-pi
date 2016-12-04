@@ -137,7 +137,7 @@ class Hell_Player():
             time.sleep(1)
 
 
-    def PrintResults(self, results=[0,0,0,0,0]):
+    def PrintResults(self, results=[0,0,0,0,0,0]):
         print('print: results')
 
         label0 = self._render_text(RESULT_TEXT_BG, self._big_font, LABEL_COLOR )
@@ -300,7 +300,7 @@ class Hell_Player():
                     for idx, word in enumerate(command):
                         print('arg' + str(idx) +':'+ word)
             
-                    self._highscore= int(command[1])+int(command[2])+int(ommand[3])+int(command[4])+int(command[5])+int(command[6])
+                    self._highscore= int(command[1])+int(command[2])+int(command[3])+int(command[4])+int(command[5])+int(command[6])
                     self.PrintResults([command[1],command[2],command[3],command[4],command[5],command[6]])
 
                     #if int(command[1]) > self._highscore and int(command[2]) > self._highscore and int(command[3]) > self._highscore :
