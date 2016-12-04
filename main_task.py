@@ -137,7 +137,7 @@ class Hell_Player():
             time.sleep(1)
 
 
-    def PrintResults(self, results=[0,0,0,0,0]):
+    def PrintResults(self, results=[0,0,0,0,0,0]):
         print('print: results')
 
         label0 = self._render_text(RESULT_TEXT_BG, self._big_font, LABEL_COLOR )
