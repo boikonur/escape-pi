@@ -9,6 +9,8 @@ import time
 
 import pygame
 
+import requests
+
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 LABEL_COLOR = (43,170,170)
@@ -271,30 +273,82 @@ class Hell_Player():
         """Render a blank screen filled with the background color."""
         self._screen.fill(BLACK)
         pygame.display.update()
+
+    def _service_screen(self):
+        """Render a blank screen filled with the background color."""
+        sw, sh = self._screen.get_size()
+        self._screen.fill(BLACK)        
+        service_text1 = self._render_text(u'Бутон 1 и 3 за  Език (20сек.)', self._small_font, RESULT_BAD_COLOR)
+        service_text2 = self._render_text(u'Бутон 1 и 2 за  Изключване (20сек.)', self._small_font, RESULT_BAD_COLOR)
+
+        l0w, l0h = service_text1.get_size()
+        l1w, l1h = service_text2.get_size()
+        self._screen.blit(service_text1, (sw/2-l0w/2, sh/3))
+        self._screen.blit(service_text2, (sw/2-l1w/2, sh/3+2*l0h))
+        pygame.display.update()
+
+    def _post_request(self):
+        url = 'http://posttestserver.com/post.php'
+        headers = {'Content-Type' : 'application/json', 'accept:': 'application/json', 'accept-encoding:' : 'gzip, deflate', 'accept-language:': 'en-US,en;q=0.8', 'user-agent: Mozilla/5.0' : '(Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36'}
+
+        login_payload = {'device_info': {'app-id': 'fc', 'os-type': 'os'}}
+        authentication = (login, password)  # Anyone who sees your authorization will be able to get this anyway
+
+        #response = requests.post(url, data=login_payload, auth=authentication, headers=headers))
+        responce = requests.post(url, data=login_payload, headers=headers)
+        print('Post responce:'+str(response))
         
     def run(self):   
       
-        self._serial.connect()       
-           
-        self._animate_countdown()
+        self._serial.connect()  
+                 
         self._blank_screen()
-     
+
+        self._post_request()
+
         while self._running:   
 
+            inputCMD= self._serial.read() 
+
+            if inputCMD == "lang_bg"+"\n":
+                    inputCMD=""
+                    self._language='bg'
+                    pygame.mixer.music.play()
+
+            if inputCMD == "lang_en"+"\n":
+                    inputCMD=""
+                    self._language='en'
+                    pygame.mixer.music.play()
+
+            if inputCMD == "reset"+"\n":
+                    inputCMD=""
+                    self._player.stop()
+                    self._highscore = 0
+                    self._stage = 0  
+                    
+            if inputCMD == "pioff"+"\n":
+                    inputCMD=""
+                    self._running = False
+                    if self._player is not None:
+                      self._player.stop()
+                    self.Shutdown()
+                
+            if inputCMD == "piscron"+"\n":
+                    inputCMD=""
+                    self.ScreenOn()
+                    
+            if inputCMD == "piscroff"+"\n":
+                    inputCMD=""
+                    self.ScreenOff()
+
             if self._stage == 0:
+                
                 inputCMD= self._serial.read() 
                 if inputCMD == "startgame"+"\n":
                     inputCMD=""
+                    self._animate_countdown()
                     self._stage = 1
-
-                if inputCMD == "lang_bg"+"\n":
-                    inputCMD=""
-                    self._language='bg'
-
-                if inputCMD == "lang_en"+"\n":
-                    inputCMD=""
-                    self._language='en'
-
+              
             if self._stage == 1:
                 if not self._player.is_playing():        
                     self._player.play(self._videodir + 'test.mp4', loop = False)
@@ -307,11 +361,10 @@ class Hell_Player():
                     self._blank_screen()
                     self.PrintResults()
                     self._stage = 3
- 		    #inputCMD= 'rez,1222,22222,3333\n'
-        
+ 		         
             if self._stage == 3:  
                 #inputCMD= 'rez,1222,22222,3333\n'
-                inputCMD= self._serial.read() 
+                
                 command = inputCMD.strip().split(",", 10)
              
                 if command[0] == "rez":
@@ -327,36 +380,13 @@ class Hell_Player():
                        self._stage=4                  
                     
                     inputCMD=""
-                    command=[]           
-                
+                    command=[]          
 
-
-                if inputCMD == "reset"+"\n":
-                    inputCMD=""
-                    self._player.stop()
-                    self._highscore = 0
-                    self._stage = 0  
-                    
-                if inputCMD == "pioff"+"\n":
-                    inputCMD=""
-                    self._running = False
-                    if self._player is not None:
-                      self._player.stop()
-                    self.Shutdown()
-                
-                if inputCMD == "piscron"+"\n":
-                    inputCMD=""
-                    self.ScreenOn()
-                    
-                if inputCMD == "piscroff"+"\n":
-                    inputCMD=""
-                    self.ScreenOff()                    
-            
             if self._stage == 4:
                 self.PrintEndScreen()
                 self._stage = 5
 
-            #if self._stage == 5:
+            if self._stage == 5:
 
                 # Give the CPU some time to do other tasks.
             time.sleep(0.002)
