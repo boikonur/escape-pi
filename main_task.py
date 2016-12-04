@@ -23,8 +23,8 @@ OPTION_COLOR2= (134,252,162)
 START_TEXT_BG = u'Играта започва след:'
 RESULT_TEXT_BG = u'РЕЗУЛТАТ'
 
-START_TEXT_EN = u'Starting in'
-RESULT_TEXT_EN = u'RESULT'
+START_TEXT_EN = u'Starting in:'
+RESULT_TEXT_EN = u'RESULTS'
 
 GAME_NAME0_BG = u'Изпитание за наблюдателност'
 GAME_NAME1_BG = u'Изпитание за сила'
@@ -140,15 +140,22 @@ class Hell_Player():
     def PrintResults(self, results=[0,0,0,0,0,0]):
         print('print: results')
 
-        label0 = self._render_text(RESULT_TEXT_BG, self._big_font, LABEL_COLOR )
-
-        label1 = self._render_text(GAME_NAME0_BG, self._small_font,  TITLE_COLOR)
-        label2 = self._render_text(GAME_NAME1_BG, self._small_font,  TITLE_COLOR)
-        label3 = self._render_text(GAME_NAME2_BG, self._small_font,  TITLE_COLOR)
-        label4 = self._render_text(GAME_NAME3_BG, self._small_font,  TITLE_COLOR)
-        label5 = self._render_text(GAME_NAME4_BG, self._small_font,  TITLE_COLOR)
-        label6 = self._render_text(GAME_NAME5_BG, self._small_font,  TITLE_COLOR)
-
+        if self._language == 'bg'
+            label0 = self._render_text(RESULT_TEXT_BG, self._big_font,   LABEL_COLOR)
+            label1 = self._render_text(GAME_NAME0_BG, self._small_font,  TITLE_COLOR)
+            label2 = self._render_text(GAME_NAME1_BG, self._small_font,  TITLE_COLOR)
+            label3 = self._render_text(GAME_NAME2_BG, self._small_font,  TITLE_COLOR)
+            label4 = self._render_text(GAME_NAME3_BG, self._small_font,  TITLE_COLOR)
+            label5 = self._render_text(GAME_NAME4_BG, self._small_font,  TITLE_COLOR)
+            label6 = self._render_text(GAME_NAME5_BG, self._small_font,  TITLE_COLOR)
+        else:
+            label0 = self._render_text(RESULT_TEXT_EN self._big_font,    LABEL_COLOR)
+            label1 = self._render_text(GAME_NAME0_EN, self._small_font,  TITLE_COLOR)
+            label2 = self._render_text(GAME_NAME1_EN, self._small_font,  TITLE_COLOR)
+            label3 = self._render_text(GAME_NAME2_EN, self._small_font,  TITLE_COLOR)
+            label4 = self._render_text(GAME_NAME3_EN, self._small_font,  TITLE_COLOR)
+            label5 = self._render_text(GAME_NAME4_EN, self._small_font,  TITLE_COLOR)
+            label6 = self._render_text(GAME_NAME5_EN, self._small_font,  TITLE_COLOR)
 
         if (int(results[0]) > GAME1_MIN_POINTS):
             res_string1 = self._render_text(str(results[0]), self._small_font, RESULT_GOOD_COLOR)
@@ -220,14 +227,18 @@ class Hell_Player():
 
     def PrintEndScreen(self):
         print('print: End Screen')
-
-        label0 = self._render_text(SUCCESS_TEXT_BG, self._big_font, LABEL_COLOR )
-        label1 = self._render_text(FIN_QURY_TEXT_BG, self._mid_font, WHITE )
+        if self._language == 'bg'
+            label0 = self._render_text(SUCCESS_TEXT_BG, self._big_font, LABEL_COLOR )
+            label1 = self._render_text(FIN_QURY_TEXT_BG, self._mid_font, WHITE )
+            label3 = self._render_text(NO_TEXT_BG, self._big_font,  OPTION_COLOR1)
+            label4 = self._render_text(YES_TEXT_BG,  self._big_font, OPTION_COLOR2)
+        else:
+            label0 = self._render_text(SUCCESS_TEXT_EN, self._big_font, LABEL_COLOR )
+            label1 = self._render_text(FIN_QURY_TEXT_EN, self._mid_font, WHITE )
+            label3 = self._render_text(NO_TEXT_EN, self._big_font,  OPTION_COLOR1)
+            label4 = self._render_text(YES_TEXT_EN,  self._big_font, OPTION_COLOR2)
+           
         label2 = self._render_text(unicode(self._highscore), self._big_font, HIGHSCORE_COLOR )
-
-        label3 = self._render_text(NO_TEXT_BG, self._big_font,  OPTION_COLOR1)
-        label4 = self._render_text(YES_TEXT_BG,  self._big_font, OPTION_COLOR2)
-
     
         l0w, l0h = label0.get_size()
         l1w, l1h = label1.get_size()
@@ -276,6 +287,14 @@ class Hell_Player():
                     inputCMD=""
                     self._stage = 1
 
+                if inputCMD == "lang_bg"+"\n":
+                    inputCMD=""
+                    self._language='bg'
+
+                if inputCMD == "lang_en"+"\n":
+                    inputCMD=""
+                    self._language='en'
+
             if self._stage == 1:
                 if not self._player.is_playing():        
                     self._player.play(self._videodir + 'test.mp4', loop = False)
@@ -310,13 +329,7 @@ class Hell_Player():
                     inputCMD=""
                     command=[]           
                 
-                if inputCMD == "lang_bg"+"\n":
-                    inputCMD=""
-                    self._language='bg'
 
-                if inputCMD == "lang_en"+"\n":
-                    inputCMD=""
-                    self._language='en'
 
                 if inputCMD == "reset"+"\n":
                     inputCMD=""
