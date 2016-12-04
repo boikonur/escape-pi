@@ -149,7 +149,7 @@ class Hell_Player():
             label5 = self._render_text(GAME_NAME4_BG, self._small_font,  TITLE_COLOR)
             label6 = self._render_text(GAME_NAME5_BG, self._small_font,  TITLE_COLOR)
         else:
-            label0 = self._render_text(RESULT_TEXT_EN self._big_font,    LABEL_COLOR)
+            label0 = self._render_text(RESULT_TEXT_EN, self._big_font,    LABEL_COLOR)
             label1 = self._render_text(GAME_NAME0_EN, self._small_font,  TITLE_COLOR)
             label2 = self._render_text(GAME_NAME1_EN, self._small_font,  TITLE_COLOR)
             label3 = self._render_text(GAME_NAME2_EN, self._small_font,  TITLE_COLOR)
