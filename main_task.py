@@ -50,6 +50,14 @@ FIN_QURY_TEXT_EN  = u'Finish?'
 NO_TEXT_EN  = u'NO'
 YES_TEXT_EN  = u'YES'
 
+GAME1_MIN_POINTS = 1
+GAME2_MIN_POINTS = 3
+GAME3_MIN_POINTS = 3
+GAME4_MIN_POINTS = 3
+GAME5_MIN_POINTS = 5
+GAME6_MIN_POINTS = 5
+
+
 class Hell_Player():
 
     def __init__(self):
@@ -58,7 +66,7 @@ class Hell_Player():
         self._running = True
         self._stage = 2
         self._videodir = "/home/pi/escape-pi/"
-        self._highscore = 6000
+        self._highscore = 0
         self._language = 'bg'
         # Initialize pygame and display a blank screen.
         pygame.display.init()
@@ -134,50 +142,59 @@ class Hell_Player():
 
         label0 = self._render_text(RESULT_TEXT_BG, self._big_font, LABEL_COLOR )
 
-        label1 = self._render_text(GAME_NAME1_BG, self._small_font,  TITLE_COLOR)
-        label2 = self._render_text(GAME_NAME2_BG, self._small_font,  TITLE_COLOR)
-        label3 = self._render_text(GAME_NAME3_BG, self._small_font,  TITLE_COLOR)
-        label4 = self._render_text(GAME_NAME4_BG, self._small_font,  TITLE_COLOR)
-        label5 = self._render_text(GAME_NAME5_BG, self._small_font,  TITLE_COLOR)
+        label1 = self._render_text(GAME_NAME0_BG, self._small_font,  TITLE_COLOR)
+        label2 = self._render_text(GAME_NAME1_BG, self._small_font,  TITLE_COLOR)
+        label3 = self._render_text(GAME_NAME2_BG, self._small_font,  TITLE_COLOR)
+        label4 = self._render_text(GAME_NAME3_BG, self._small_font,  TITLE_COLOR)
+        label5 = self._render_text(GAME_NAME4_BG, self._small_font,  TITLE_COLOR)
+        label6 = self._render_text(GAME_NAME5_BG, self._small_font,  TITLE_COLOR)
 
 
-        if (int(results[0]) > self._highscore):
+        if (int(results[0]) > GAME1_MIN_POINTS):
             res_string1 = self._render_text(str(results[0]), self._small_font, RESULT_GOOD_COLOR)
         else:   
             res_string1 = self._render_text(str(results[0]), self._small_font, RESULT_BAD_COLOR)
 
-        if (int(results[1]) > self._highscore):
+        if (int(results[1]) > GAME2_MIN_POINTS):
             res_string2 = self._render_text(str(results[1]), self._small_font, RESULT_GOOD_COLOR)
         else:
             res_string2 = self._render_text(str(results[1]), self._small_font, RESULT_BAD_COLOR)
 
-        if (int(results[2]) > self._highscore):
+        if (int(results[2]) > GAME3_MIN_POINTS):
             res_string3 = self._render_text(str(results[2]), self._small_font, RESULT_GOOD_COLOR)
         else:
             res_string3 = self._render_text(str(results[2]), self._small_font, RESULT_BAD_COLOR)
 
-        if (int(results[3]) > self._highscore):
+        if (int(results[3]) > GAME4_MIN_POINTS):
             res_string4 = self._render_text(str(results[3]), self._small_font, RESULT_GOOD_COLOR)
         else:
             res_string4 = self._render_text(str(results[3]), self._small_font, RESULT_BAD_COLOR)
 
-        if (int(results[4]) > self._highscore):
+        if (int(results[4]) > GAME5_MIN_POINTS):
             res_string5 = self._render_text(str(results[4]), self._small_font, RESULT_GOOD_COLOR)
         else:
             res_string5 = self._render_text(str(results[4]), self._small_font, RESULT_BAD_COLOR)
 
+        if (int(results[5]) > GAME6_MIN_POINTS):
+            res_string6 = self._render_text(str(results[5]), self._small_font, RESULT_GOOD_COLOR)
+        else:
+            res_string6 = self._render_text(str(results[5]), self._small_font, RESULT_BAD_COLOR)
+
         l0w, l0h = label0.get_size()
+
         l1w, l1h = label1.get_size()
         l2w, l2h = label2.get_size()
         l3w, l3h = label3.get_size()
         l4w, l4h = label4.get_size()
         l5w, l5h = label5.get_size()
+        l6w, l6h = label6.get_size()
 
         r1w, r1h = res_string1.get_size()
         r2w, r2h = res_string2.get_size()
         r3w, r3h = res_string3.get_size()
         r4w, r4h = res_string4.get_size()
         r5w, r5h = res_string5.get_size()
+        r6w, r6h = res_string6.get_size()
 
         sw, sh = self._screen.get_size()
         self._screen.fill(BLACK)
@@ -189,12 +206,14 @@ class Hell_Player():
         self._screen.blit(label3, (sw/5, sh/3+l1h*2 +l2h*2))
         self._screen.blit(label4, (sw/5, sh/3+l1h*2 +l2h*2 + l3h*2))
         self._screen.blit(label5, (sw/5, sh/3+l1h*2 +l2h*2 + l3h*2 +l4h*2))
+        self._screen.blit(label6, (sw/5, sh/3+l1h*2 +l2h*2 + l3h*2 +l4h*2+l5h*2))
 
         self._screen.blit(res_string1, (sw/2+sw/4, sh/3))
         self._screen.blit(res_string2, (sw/2+sw/4, sh/3+l1h*2))
         self._screen.blit(res_string3, (sw/2+sw/4, sh/3+l1h*2 +l2h*2))
         self._screen.blit(res_string4, (sw/2+sw/4, sh/3+l1h*2 +l2h*2 +l3h*2))
         self._screen.blit(res_string5, (sw/2+sw/4, sh/3+l1h*2 +l2h*2 +l3h*2 +l4h*2))
+        self._screen.blit(res_string6, (sw/2+sw/4, sh/3+l1h*2 +l2h*2 +l3h*2 +l4h*2 +l5h*2))
 
         pygame.display.update()
         pygame.mixer.music.play()
@@ -204,14 +223,17 @@ class Hell_Player():
 
         label0 = self._render_text(SUCCESS_TEXT_BG, self._big_font, LABEL_COLOR )
         label1 = self._render_text(FIN_QURY_TEXT_BG, self._mid_font, WHITE )
-        label2 = self._render_text(NO_TEXT_BG, self._big_font,  OPTION_COLOR1)
-        label3 = self._render_text(YES_TEXT_BG,  self._big_font, OPTION_COLOR2)
+        label2 = self._render_text(self._highscore, self._mid_font, WHITE )
+
+        label3 = self._render_text(NO_TEXT_BG, self._big_font,  OPTION_COLOR1)
+        label4 = self._render_text(YES_TEXT_BG,  self._big_font, OPTION_COLOR2)
 
     
         l0w, l0h = label0.get_size()
         l1w, l1h = label1.get_size()
         l2w, l2h = label2.get_size()
         l3w, l3h = label3.get_size()
+        l4w, l4h = label4.get_size()
 
         sw, sh = self._screen.get_size()
         self._screen.fill(BLACK)
@@ -219,9 +241,10 @@ class Hell_Player():
         self._screen.blit(label0, (sw/2-l0w/2, l0h/3))
 
         self._screen.blit(label1, (sw/2-l1w/2, sh/2+l1h/2))
+        self._screen.blit(label2, (sw/2-l1w/2, sh/2-l1h/2))
 
-        self._screen.blit(label2, (sw/4-l2w/2, 3*sh/4))
-        self._screen.blit(label3, (3*sw/4-l3w/2, 3*sh/4))
+        self._screen.blit(label3, (sw/4-l2w/2, 3*sh/4))
+        self._screen.blit(label4, (3*sw/4-l3w/2, 3*sh/4))
 
         pygame.display.update()
         pygame.mixer.music.play()
@@ -277,8 +300,8 @@ class Hell_Player():
                     for idx, word in enumerate(command):
                         print('arg' + str(idx) +':'+ word)
             
-    
-                    #self.PrintResults([command[1],command[2],command[3],command[4],command[5]])
+                    self._highscore= int(command[1])+int(command[2])+int(ommand[3])+int(command[4])+int(command[5])+int(command[6])
+                    self.PrintResults([command[1],command[2],command[3],command[4],command[5],command[6])
 
                     #if int(command[1]) > self._highscore and int(command[2]) > self._highscore and int(command[3]) > self._highscore :
                      #   print("All Games are won")
@@ -298,7 +321,8 @@ class Hell_Player():
                 if inputCMD == "reset"+"\n":
                     inputCMD=""
                     self._player.stop()
-                    self._stage=0  
+                    self._highscore = 0
+                    self._stage = 0  
                     
                 if inputCMD == "pioff"+"\n":
                     inputCMD=""
