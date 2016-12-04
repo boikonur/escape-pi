@@ -288,15 +288,16 @@ class Hell_Player():
         pygame.display.update()
 
     def _post_request(self):
-        url = 'http://posttestserver.com/post.php'
-        headers = {'Content-Type' : 'application/json', 'accept:': 'application/json', 'accept-encoding:' : 'gzip, deflate', 'accept-language:': 'en-US,en;q=0.8', 'user-agent: Mozilla/5.0' : '(Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36'}
-
+        url = 'http://requestb.in/znx6gnzn'
+        headers = {'Content-Type' : 'application/json'}
         login_payload = {'device_info': {'app-id': 'fc', 'os-type': 'os'}}
+
         authentication = (login, password)  # Anyone who sees your authorization will be able to get this anyway
 
         #response = requests.post(url, data=login_payload, auth=authentication, headers=headers))
         responce = requests.post(url, data=login_payload, headers=headers)
-        print('Post responce:'+str(response))
+        print 'POST Code:' + responce.status_code
+        print 'POST Content:' + responce.content
         
     def run(self):   
       
@@ -390,7 +391,7 @@ class Hell_Player():
                 command = inputCMD.strip().split(",", 10)
                 if command[0] == "rez":
                     self._stage = 3
-                    
+
             # Give the CPU some time to do other tasks.
             time.sleep(0.002)
 
