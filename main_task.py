@@ -301,7 +301,7 @@ class Hell_Player():
                         print('arg' + str(idx) +':'+ word)
             
                     self._highscore= int(command[1])+int(command[2])+int(ommand[3])+int(command[4])+int(command[5])+int(command[6])
-                    self.PrintResults([command[1],command[2],command[3],command[4],command[5],command[6])
+                    self.PrintResults([command[1],command[2],command[3],command[4],command[5],command[6]])
 
                     #if int(command[1]) > self._highscore and int(command[2]) > self._highscore and int(command[3]) > self._highscore :
                      #   print("All Games are won")
