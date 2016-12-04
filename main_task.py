@@ -280,7 +280,7 @@ class Hell_Player():
                 if command[0] == "rez":
 
                     for idx, word in enumerate(command):
-                        print('arg' + idx +':'+word)
+                        print('arg' + str(idx) +':'+ word)
             
     
                     #self.PrintResults([command[1],command[2],command[3],command[4],command[5]])
