@@ -15,7 +15,7 @@ LABEL_COLOR = (43,170,170)
 RESULT_COLOR = (134,67,21)
 RESULT_BAD_COLOR = (252,120,120)
 RESULT_GOOD_COLOR = (134,252,162)
-TITLE_COLOR = (255,196,9)
+TITLE_COLOR = (249,209,9)
 
 OPTION_COLOR1= (252,134,134)
 OPTION_COLOR2= (134,252,162)
@@ -83,7 +83,7 @@ class Hell_Player():
         size = (pygame.display.Info().current_w, pygame.display.Info().current_h)
         self._screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
         self._blank_screen()            
-        self._small_font = pygame.font.Font(None, 50)
+        self._small_font = pygame.font.Font(None, 60)
         self._mid_font = pygame.font.Font(None, 100)
         self._big_font   = pygame.font.Font(None, 250)
         
