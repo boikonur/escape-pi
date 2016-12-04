@@ -223,7 +223,7 @@ class Hell_Player():
 
         label0 = self._render_text(SUCCESS_TEXT_BG, self._big_font, LABEL_COLOR )
         label1 = self._render_text(FIN_QURY_TEXT_BG, self._mid_font, WHITE )
-        label2 = self._render_text(self._highscore, self._mid_font, WHITE )
+        label2 = self._render_text(unicode(self._highscore), self._mid_font, WHITE )
 
         label3 = self._render_text(NO_TEXT_BG, self._big_font,  OPTION_COLOR1)
         label4 = self._render_text(YES_TEXT_BG,  self._big_font, OPTION_COLOR2)
