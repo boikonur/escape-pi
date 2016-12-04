@@ -387,8 +387,11 @@ class Hell_Player():
                 self._stage = 5
 
             if self._stage == 5:
-
-                # Give the CPU some time to do other tasks.
+                command = inputCMD.strip().split(",", 10)
+                if command[0] == "rez":
+                    self._stage = 3
+                    
+            # Give the CPU some time to do other tasks.
             time.sleep(0.002)
 
     def signal_quit(self, signal, frame):
