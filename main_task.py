@@ -326,6 +326,7 @@ class Hell_Player():
                     self._player.stop()
                     self._highscore = 0
                     self._stage = 0  
+                    self._post_request()
                     
             if inputCMD == "pioff"+"\n":
                     inputCMD=""
@@ -364,7 +365,6 @@ class Hell_Player():
                     self._stage = 3
  		         
             if self._stage == 3:  
-                #inputCMD= 'rez,1222,22222,3333\n'
                 
                 command = inputCMD.strip().split(",", 10)
              
@@ -403,8 +403,6 @@ class Hell_Player():
         pygame.quit()
         sys.exit(0)
      
-
-
 # Main entry point.
 if __name__ == '__main__':  
     print('Escape PI')
