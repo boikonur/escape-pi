@@ -68,7 +68,7 @@ class Hell_Player():
         self._serial = self._load_serial()
         self._player = self._load_player()        
         self._running = True
-        self._stage = 2
+        self._stage = 1
         self._videodir = "/home/pi/escape-pi/"
         self._highscore = 0
         self._language = 'bg'
@@ -371,8 +371,6 @@ class Hell_Player():
               #  self._post_request()
 
             if self._stage == 0:
-                
-                inputCMD= self._serial.read() 
                 if inputCMD == "startgame"+"\n":
                     inputCMD=""
                     self._animate_countdown()
@@ -392,11 +390,10 @@ class Hell_Player():
                     self._stage = 3
  		         
             if self._stage == 3:  
-                
                 command = inputCMD.strip().split(",", 10)
              
                 if command[0] == "rez":
-
+                     print("Incomming results")
                     for idx, word in enumerate(command):
                         print('arg' + str(idx) +':'+ word)
             

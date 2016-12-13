@@ -11,7 +11,7 @@ class SerialCom():
           try:
             if self.ser == None:
                 self.ser = serial.Serial('/dev/ttyS0', 9600, timeout=1)
-                print "Successfully connected on /dev/ttyAMA0"
+                print "Successfully connected on /dev/ttyS0"
                 self.ser.flushInput()
                 self.ser.flushOutput()
                 time.sleep(.1)
