@@ -69,6 +69,7 @@ class Hell_Player():
         self._player = self._load_player()        
         self._running = True
         self._stage = 1
+        self._prevstage = 1
         self._videodir = "/home/pi/escape-pi/"
         self._highscore = 0
         self._language = 'bg'
@@ -330,6 +331,10 @@ class Hell_Player():
 
         while self._running:   
 
+        if self._prevstage != seld._stage:
+            self._prevstage = self._stage
+            print("STAGE:" +  seld._stage)
+
             inputCMD= self._serial.read() 
 
             if inputCMD == "lang_bg"+"\n":
@@ -344,9 +349,11 @@ class Hell_Player():
 
             if inputCMD == "reset"+"\n":
                     inputCMD=""
+                    print("Reset CMD")
                     self._player.stop()
                     self._highscore = 0
                     self._stage = 0  
+                    self._stage = 1
                    # self._post_request()
                     
             if inputCMD == "pioff"+"\n":
@@ -369,13 +376,15 @@ class Hell_Player():
                 self._stage == 0
                 self.PrintFailure()
               #  self._post_request()
+            
+            if inputCMD == "startgame"+"\n":
+                inputCMD=""
+                self._animate_countdown()
+                self._stage = 1
 
             if self._stage == 0:
-                if inputCMD == "startgame"+"\n":
-                    inputCMD=""
-                    self._animate_countdown()
-                    self._stage = 1
-              
+                self._stage == 1
+
             if self._stage == 1:
                 if not self._player.is_playing():        
                     self._player.play(self._videodir + 'test.mp4', loop = False)
@@ -393,7 +402,7 @@ class Hell_Player():
                 command = inputCMD.strip().split(",", 10)
              
                 if command[0] == "rez":
-                     print("Incomming results")
+                    print("Incomming results")
                     for idx, word in enumerate(command):
                         print('arg' + str(idx) +':'+ word)
             
