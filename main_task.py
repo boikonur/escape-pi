@@ -326,7 +326,7 @@ class Hell_Player():
                  
         self._blank_screen()
 
-        self._post_request()
+        #self._post_request()
 
         while self._running:   
 
@@ -347,7 +347,7 @@ class Hell_Player():
                     self._player.stop()
                     self._highscore = 0
                     self._stage = 0  
-                    self._post_request()
+                   # self._post_request()
                     
             if inputCMD == "pioff"+"\n":
                     inputCMD=""
@@ -368,6 +368,7 @@ class Hell_Player():
                 inputCMD=""
                 self._stage == 0
                 self.PrintFailure()
+              #  self._post_request()
 
             if self._stage == 0:
                 
