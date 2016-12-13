@@ -22,11 +22,13 @@ HIGHSCORE_COLOR=(30, 250, 30)
 OPTION_COLOR1= (252,134,134)
 OPTION_COLOR2= (134,252,162)
 
+FAIL_TEXT_BG = u'ПРОВАЛ'
 START_TEXT_BG = u'Играта започва след:'
 RESULT_TEXT_BG = u'РЕЗУЛТАТ'
 
 START_TEXT_EN = u'Starting in:'
 RESULT_TEXT_EN = u'RESULTS'
+FAIL_TEXT_EN = u'FAILURE'
 
 GAME_NAME0_BG = u'Изпитание за наблюдателност'
 GAME_NAME1_BG = u'Изпитание за сила'
@@ -261,13 +263,32 @@ class Hell_Player():
 
         pygame.display.update()
         pygame.mixer.music.play()
-        
+       
+    def PrintFailure(self):
+        print('print: End Screen')
+        if self._language == 'bg':
+            label0 = self._render_text(FAIL_TEXT_BG, self._big_font, LABEL_COLOR )    
+        else:
+            label0 = self._render_text(FAIL_TEXT_EN, self._big_font, LABEL_COLOR )
+          
+        l0w, l0h = label0.get_size()
+        sw, sh = self._screen.get_size()
+
+        self._screen.fill(BLACK)
+        self._screen.blit(label0, (sw/2-l0w/2, l0h/2-l0h/2))
+        pygame.display.update()
+
     def PrintArrows(self):
 
         sw, sh = self._screen.get_size()
         self._screen.fill(BLACK)
         # self._screen.blit(label2, (sw/2-l2w/2, sh/2-l2h/2))
         pygame.display.update()
+
+        self._screen.fill(BLACK)
+
+        self._screen.blit(label0, (sw/2-l0w/2, l0h/2-l0h/2))
+
  
     def _blank_screen(self):
         """Render a blank screen filled with the background color."""
@@ -342,6 +363,11 @@ class Hell_Player():
             if inputCMD == "piscroff"+"\n":
                     inputCMD=""
                     self.ScreenOff()
+
+            if inputCMD == "failgame"+ "\n":
+                inputCMD=""
+                self._stage == 0
+                self.PrintFailure()
 
             if self._stage == 0:
                 
