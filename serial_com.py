@@ -32,10 +32,10 @@ class SerialCom():
             return False
 
 
-      def flushInput(self)
-        self.ser.flushInput()
-        time.sleep(.1)
-        
+      def flushIn(self)
+          self.ser.flushInput()
+          time.sleep(.1)
+
       def isConnected(self):
           '''Is the computer connected'''
           try:
