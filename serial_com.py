@@ -31,6 +31,11 @@ class SerialCom():
           except serial.SerialException, e:
             return False
 
+
+      def flushInput(self)
+        self.ser.flushInput()
+        time.sleep(.1)
+        
       def isConnected(self):
           '''Is the computer connected'''
           try:
