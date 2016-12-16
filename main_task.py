@@ -389,7 +389,7 @@ class Hell_Player():
             if self._stage == 3:  
                 command = inputCMD.strip().split(",", 10)
              
-                if command[0] == "rez"
+                if command[0] == "rez":
                     print("Incomming results")
                     for idx, word in enumerate(command):
                         print('arg' + str(idx) +':'+ word)
