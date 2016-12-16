@@ -69,7 +69,7 @@ class Hell_Player():
         self._serial = self._load_serial()
         self._player = self._load_player()        
         self._running = True
-        self._stage = 1
+        self._stage = 0
         self._prevstage = 1
         self._videodir = "/home/pi/escape-pi/"
         self._highscore = 0
@@ -370,8 +370,8 @@ class Hell_Player():
                 self._stage = 1
 
             #stage game
-            if self._stage == 0:
-                self._stage == 1
+            # if self._stage == 0:
+            #     self._stage == 1
 
             if self._stage == 1:
                 if not self._player.is_playing():        
