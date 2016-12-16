@@ -360,7 +360,7 @@ class Hell_Player():
                     self._highscore = 0
                     self._stage = 0  
                     self._blank_screen()
-                    self.ScreenOff()
+                    #self.ScreenOff()
                    #self._post_request()
             
             if inputCMD == "startgame"+"\n":
