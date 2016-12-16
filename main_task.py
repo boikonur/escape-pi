@@ -21,6 +21,7 @@ TITLE_COLOR = (255,216,50)
 HIGHSCORE_COLOR=(30, 250, 30)
 OPTION_COLOR1= (252,134,134)
 OPTION_COLOR2= (134,252,162)
+FAIL_LABEL_COLOR = (160, 30, 30)
 
 FAIL_TEXT_BG = u'ПРОВАЛ'
 START_TEXT_BG = u'Играта започва след:'
@@ -264,15 +265,15 @@ class Hell_Player():
     def PrintFailure(self):
         print('print: End Screen')
         if self._language == 'bg':
-            label0 = self._render_text(FAIL_TEXT_BG, self._big_font, LABEL_COLOR )    
+            label0 = self._render_text(FAIL_TEXT_BG, self._big_font, FAIL_LABEL_COLOR )    
         else:
-            label0 = self._render_text(FAIL_TEXT_EN, self._big_font, LABEL_COLOR )
+            label0 = self._render_text(FAIL_TEXT_EN, self._big_font, FAIL_LABEL_COLOR )
           
         l0w, l0h = label0.get_size()
         sw, sh = self._screen.get_size()
 
         self._screen.fill(BLACK)
-        self._screen.blit(label0, (sw/2-l0w/2, l0h/2-l0h/2))
+        self._screen.blit(label0, (sw/2-l0w/2, sh/2-l0h/2))
         pygame.display.update()
 
     def _blank_screen(self):
@@ -330,15 +331,6 @@ class Hell_Player():
                     inputCMD=""
                     self._language='en'
                     pygame.mixer.music.play()
-
-            if inputCMD == "reset"+"\n":
-                    inputCMD=""
-                    print("Reset CMD")
-                    self._player.stop()
-                    self._highscore = 0
-                    self._stage = 0  
-                    self._stage = 1
-                   #self._post_request()
                     
             if inputCMD == "pioff"+"\n":
                     inputCMD=""
@@ -361,8 +353,19 @@ class Hell_Player():
                 self.PrintFailure()
               #  self._post_request()
             
+            if inputCMD == "reset"+"\n":
+                    inputCMD=""
+                    print("Reset CMD")
+                    self._player.stop()
+                    self._highscore = 0
+                    self._stage = 0  
+                    self._blank_screen()
+                    self.ScreenOff()
+                   #self._post_request()
+            
             if inputCMD == "startgame"+"\n":
                 inputCMD=""
+                self.ScreenOn()
                 self._animate_countdown()
                 self._stage = 1
 
@@ -386,7 +389,7 @@ class Hell_Player():
             if self._stage == 3:  
                 command = inputCMD.strip().split(",", 10)
              
-                if command[0] == "rez":
+                if command[0] == "rez"
                     print("Incomming results")
                     for idx, word in enumerate(command):
                         print('arg' + str(idx) +':'+ word)
