@@ -84,7 +84,6 @@ class Hell_Player():
         
         #fadeout()  #time
         #set_volume()  #from 0.0 to 1.0
-       
         size = (pygame.display.Info().current_w, pygame.display.Info().current_h)
         self._screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
         self._blank_screen()            
@@ -93,12 +92,10 @@ class Hell_Player():
         self._big_font   = pygame.font.Font(None, 250)
         
     def _load_player(self):     
-        return importlib.import_module('omxplayer', 'escape-pi') \
-            .create_player()
+        return importlib.import_module('omxplayer', 'escape-pi').create_player()
         
     def _load_serial(self):     
-        return importlib.import_module('serial_com', 'escape-pi') \
-            .create_serial()
+        return importlib.import_module('serial_com', 'escape-pi').create_serial()
     
     def Shutdown(self):  
         os.system("sudo shutdown -h now")  
@@ -118,8 +115,7 @@ class Hell_Player():
     def _render_text(self, message, font=None, color=WHITE):
         """Draw the provided message and return as pygame surface of it rendered
         with the configured foreground and background color.
-        """
-        # Default to small font if not provided.
+        """   
         if font is None:
             font = self._small_font
         return font.render(message, True, color, BLACK)
@@ -279,18 +275,6 @@ class Hell_Player():
         self._screen.blit(label0, (sw/2-l0w/2, l0h/2-l0h/2))
         pygame.display.update()
 
-    def PrintArrows(self):
-
-        sw, sh = self._screen.get_size()
-        self._screen.fill(BLACK)
-        # self._screen.blit(label2, (sw/2-l2w/2, sh/2-l2h/2))
-        pygame.display.update()
-
-        self._screen.fill(BLACK)
-
-        self._screen.blit(label0, (sw/2-l0w/2, l0h/2-l0h/2))
-
- 
     def _blank_screen(self):
         """Render a blank screen filled with the background color."""
         self._screen.fill(BLACK)
@@ -331,9 +315,9 @@ class Hell_Player():
 
         while self._running:   
 
-        if self._prevstage != seld._stage:
-            self._prevstage = self._stage
-            print("STAGE:" +  seld._stage)
+            if self._prevstage != seld._stage:
+                self._prevstage = self._stage
+                print("STAGE:" +  seld._stage)
 
             inputCMD= self._serial.read() 
 
@@ -354,7 +338,7 @@ class Hell_Player():
                     self._highscore = 0
                     self._stage = 0  
                     self._stage = 1
-                   # self._post_request()
+                   #self._post_request()
                     
             if inputCMD == "pioff"+"\n":
                     inputCMD=""
@@ -382,6 +366,7 @@ class Hell_Player():
                 self._animate_countdown()
                 self._stage = 1
 
+            #stage game
             if self._stage == 0:
                 self._stage == 1
 
