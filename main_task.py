@@ -315,9 +315,9 @@ class Hell_Player():
 
         while self._running:   
 
-            if self._prevstage != seld._stage:
+            if self._prevstage != self._stage:
                 self._prevstage = self._stage
-                print("STAGE:" +  seld._stage)
+                print("STAGE:" +  str(self._stage))
 
             inputCMD= self._serial.read() 
 
