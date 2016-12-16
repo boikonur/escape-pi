@@ -365,7 +365,7 @@ class Hell_Player():
             
             if inputCMD == "startgame"+"\n":
                 inputCMD=""
-                self.ScreenOn()
+                #self.ScreenOn()
                 self._animate_countdown()
                 self._stage = 1
 
