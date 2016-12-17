@@ -365,6 +365,14 @@ class Hell_Player():
                     self._blank_screen()
                     #self.ScreenOff()
                    #self._post_request()
+
+            if inputCMD == "replay"+"\n":
+                    inputCMD=""
+                    print("Replay CMD")               
+                    self._blank_screen()
+                    self._stage == 3
+                    #self.ScreenOff()
+                   #self._post_request()     
             
             if inputCMD == "startgame"+"\n":
                 inputCMD=""
