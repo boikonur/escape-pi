@@ -19,7 +19,7 @@ RESULT_BAD_COLOR = (252,120,120)
 RESULT_GOOD_COLOR = (134,252,162)
 TITLE_COLOR1 = (255,216,50)
 TITLE_COLOR2 = (255,100,50)
-TITLE_COLOR3 = (255,50,50)
+TITLE_COLOR3 = (255,25,25)
 
 HIGHSCORE_COLOR=(30, 250, 30)
 OPTION_COLOR1= (252,134,134)
@@ -140,7 +140,7 @@ class Hell_Player():
             pygame.display.update()
             # Pause for a second between each frame.
             time.sleep(1)
-
+        self._screen.fill(BLACK)
 
     def PrintResults(self, results=[0,0,0,0,0,0]):
         print('print: results')
