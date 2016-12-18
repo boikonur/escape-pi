@@ -350,19 +350,15 @@ class Hell_Player():
                     inputCMD=""
                     self.ScreenOff()
 
-            if inputCMD == "failgame"+ "\n":
-                inputCMD=""
-                self._stage == 0
-                self.PrintFailure()
-              #  self._post_request()
+
             
             if inputCMD == "reset"+"\n":
                     inputCMD=""
                     print("Reset CMD")
                     self._player.stop()
                     self._highscore = 0
-                    self._stage = 0  
                     self._blank_screen()
+                    self._stage = 0  
                     #self.ScreenOff()
                    #self._post_request()
 
@@ -374,14 +370,27 @@ class Hell_Player():
                     #self.ScreenOff()
                    #self._post_request()     
             
+            if inputCMD == "endscreen"+"\n":
+                    inputCMD=""
+                    print("END screen CMD")               
+                    self._blank_screen()
+                    self.PrintEndScreen()
+                    self._stage == 3
+                    #self.ScreenOff()
+                   #self._post_request()  
+
             if inputCMD == "startgame"+"\n":
                 inputCMD=""
                 #self.ScreenOn()                
                 self._stage = 1
+                
+            if inputCMD == "failgame"+ "\n":
+                inputCMD=""
+                self._stage == 0
+                self.PrintFailure()
+              #  self._post_request()
 
-            #stage game
-            # if self._stage == 0:
-            #     self._stage == 1
+
 
             if self._stage == 1:
                 if not self._player.is_playing():        
@@ -407,16 +416,12 @@ class Hell_Player():
                     self._highscore= int(command[1])+int(command[2])+int(command[3])+int(command[4])+int(command[5])+int(command[6])
                     self.PrintResults([command[1],command[2],command[3],command[4],command[5],command[6]])
 
-                    if int(command[5]) > GAME5_MIN_POINTS and int(command[6]) > GAME6_MIN_POINTS:
+                    if int(command[1]) > GAME1_MIN_POINTS and int(command[2]) > GAME2_MIN_POINTS and int(command[3]) > GAME3_MIN_POINTS and int(command[4]) > GAME4_MIN_POINTS and int(command[5]) > GAME5_MIN_POINTS and int(command[6]) > GAME6_MIN_POINTS:
                        print("All Games are won")
-                       self._stage=4                  
+              
                     
-                    inputCMD=""
-                    command=[]          
+                         
 
-            if self._stage == 4:
-                self.PrintEndScreen()
-                self._stage = 5
 
             if self._stage == 5:
                 command = inputCMD.strip().split(",", 10)
