@@ -30,23 +30,23 @@ FAIL_TEXT_BG = u'ПРОВАЛ'
 START_TEXT_BG = u'Играта започва след:'
 RESULT_TEXT_BG = u'РЕЗУЛТАТ'
 
+FAIL_TEXT_EN = u'FAILURE'
 START_TEXT_EN = u'Starting in:'
 RESULT_TEXT_EN = u'RESULTS'
-FAIL_TEXT_EN = u'FAILURE'
 
 GAME_NAME0_BG = u'Изпитание за наблюдателност'
 GAME_NAME1_BG = u'Изпитание за сила'
-GAME_NAME2_BG  = u'Изпитание за координация'
+GAME_NAME2_BG = u'Изпитание за координация'
 GAME_NAME3_BG = u'Изпитание за бързина'
-GAME_NAME4_BG  = u'Изпитание за ловкост'
-GAME_NAME5_BG  = u'Изпитание за точност'
+GAME_NAME4_BG = u'Изпитание за ловкост'
+GAME_NAME5_BG = u'Изпитание за точност'
 
-GAME_NAME0_EN = u'Izpitanie Nabludatelnost'
-GAME_NAME1_EN = u'Izpitanie za Sila'
-GAME_NAME2_EN  = u'Izpitanie za Koordinaciq'
-GAME_NAME3_EN = u'Izpitanie za burzina'
-GAME_NAME4_EN  = u'Izpitanie za Lovkost'
-GAME_NAME5_EN  = u'Izpitanie za Tochnost'
+GAME_NAME0_EN = u'Observation test'
+GAME_NAME1_EN = u'Strenght test'
+GAME_NAME2_EN = u'Coordination test'
+GAME_NAME3_EN = u'Speed test'
+GAME_NAME4_EN = u'Agility test'
+GAME_NAME5_EN = u'Dextirity test'
 
 SUCCESS_TEXT_BG  = u'ФИНАЛ'
 FIN_QURY_TEXT_BG  = u'Край?'
@@ -230,6 +230,7 @@ class Hell_Player():
         pygame.display.update()
         pygame.mixer.music.play()
 
+    #Replay or finish screen
     def PrintEndScreen(self):
         print('print: End Screen')
         if self._language == 'bg':
@@ -393,10 +394,16 @@ class Hell_Player():
 
 
             if self._stage == 1:
-                if not self._player.is_playing():        
-                    self._player.play(self._videodir + 'test.mp4', loop = False)
-                    print('playing: ' + self._videodir + 'test.mp4')
-                    self._stage = 2
+                if not self._player.is_playing():
+                    if self._language == 'bg':                            
+                        self._player.play(self._videodir + 'intro_bg.mp4', loop = False, vol=-4000)
+                        print('playing: ' + self._videodir + 'intro_bg.mp4')
+                        self._stage = 2
+                    else:
+                        self._player.play(self._videodir + 'intro_eng.mp4', loop = False, vol=-4000)
+                        print('playing: ' + self._videodir + 'intro_eng.mp4')
+                        self._stage = 2
+
 
             if self._stage == 2:
                 if not self._player.is_playing(): 
