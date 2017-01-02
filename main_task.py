@@ -400,11 +400,11 @@ class Hell_Player():
             if self._stage == 1:
                 if not self._player.is_playing():
                     if self._language == 'bg':                            
-                        self._player.play(self._videodir + 'intro_bg.mp4', loop = False, vol=-4000)
+                        self._player.play(self._videodir + 'intro_bg.mp4', loop = False, vol=-2000)
                         print('playing: ' + self._videodir + 'intro_bg.mp4')
                         self._stage = 2
                     else:
-                        self._player.play(self._videodir + 'intro_eng.mp4', loop = False, vol=-4000)
+                        self._player.play(self._videodir + 'intro_eng.mp4', loop = False, vol=-2000)
                         print('playing: ' + self._videodir + 'intro_eng.mp4')
                         self._stage = 2
 
