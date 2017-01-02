@@ -83,7 +83,7 @@ class Hell_Player():
         pygame.mouse.set_visible(False)
 
         pygame.mixer.init()
-        pygame.mixer.music.load("gong.wav")       
+        pygame.mixer.music.load("/home/pi/escape-pi/gong.wav")       
         pygame.mixer.music.set_volume(10)
         
         #fadeout()  #time
@@ -228,7 +228,7 @@ class Hell_Player():
         self._screen.blit(res_string6, (sw/2+sw/4, sh/3+l1h*2 +l2h*2 +l3h*2 +l4h*2 +l5h*2))
 
         pygame.display.update()
-        pygame.mixer.music.load("gong.wav") 
+        pygame.mixer.music.load("/home/pi/escape-pi/gong.wav") 
         pygame.mixer.music.play()
 
     #Replay or finish screen
@@ -265,7 +265,7 @@ class Hell_Player():
         self._screen.blit(label4, (3*sw/4-l3w/2, 3*sh/4))
 
         pygame.display.update()
-        pygame.mixer.music.load("gong.wav") 
+        pygame.mixer.music.load("/home/pi/escape-pi/gong.wav") 
         pygame.mixer.music.play()
        
     def PrintFailure(self):
@@ -331,13 +331,13 @@ class Hell_Player():
             if inputCMD == "lang_bg"+"\n":
                     inputCMD=""
                     self._language='bg'
-                    pygame.mixer.music.load("lang_bg.wav") 
+                    pygame.mixer.music.load("/home/pi/escape-pi/lang_bg.wav") 
                     pygame.mixer.music.play()
 
             if inputCMD == "lang_en"+"\n":
                     inputCMD=""
                     self._language='en'
-                    pygame.mixer.music.load("lang_en.wav") 
+                    pygame.mixer.music.load("/home/pi/escape-pi/lang_en.wav") 
                     pygame.mixer.music.play()
                     
             if inputCMD == "pioff"+"\n":
